@@ -1,0 +1,40 @@
+<include target="_header.html" />
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+<form action="./" method="post" id="fo_write" class="faqWrite" ruleset="insertQuestion">
+	<input type="hidden" name="act" value="procFaqInsertQuestion" />
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="answer" value="{$oQuestion->getAnswerText()}" />
+	<input type="hidden" name="question_srl" value="{$question_srl}" />
+	<input type="hidden" name="enable_category" value="N" />
+	
+	<block cond="!$question_srl">
+		{@ Context::set('question_srl',NULL)}
+	</block>
+	<div class="Question">
+		<label class="title">{$lang->question_title}:</label>
+			<block cond="$module_info->use_category=='Y'">
+				<input type="hidden" name="enable_category" value="Y" />
+				<select name="category_srl" class="category">
+					<option value="">{$lang->category}</option>
+					<option loop="$category_list => $val" value="{$val->category_srl}" selected="selected"|cond="$val->grant&&$val->selected||$val->category_srl==$oQuestion->get('category_srl')">
+						{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} ({$val->question_count})
+					</option>
+				</select>
+			</block>
+			<input type="text" name="question" class="inputText" value="{htmlspecialchars($oQuestion->getQuestionText())}" style="width:400px"/>
+
+	</div>
+	<div class="Answer">
+		<label class="title">{$lang->answer_title} :</label>
+		<div class="editor">{$oQuestion->getEditor()}</div>
+	</div>
+
+	<div class="boardNavigation1">
+		<span class="btn red strong"><input type="submit" value="{$lang->cmd_registration}" accesskey="s" /></span>
+	</div>
+
+
+</form>

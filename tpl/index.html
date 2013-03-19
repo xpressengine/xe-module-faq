@@ -1,0 +1,84 @@
+<include target="./header.html" />
+
+<form action="./" method="get" class="adminSearch faq_search_form">
+	<input type="hidden" name="module" value="{$module}" />
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="vid" value="{$vid}" />
+	<input type="hidden" name="act" value="dispFaqAdminContent" />
+        <fieldset>
+			<label for="s_mid">{$lang->mid} </label><input type="text" id="s_mid" name="s_mid" value="{$s_mid}" class="inputTypeText" />
+			<label for="s_browser_title">{$lang->browser_title} </label><input type="text" id="s_browser_title" name="s_browser_title" value="{$s_browser_title}" class="inputTypeText" />
+            <span class="button blue"><input type="submit" value="{$lang->cmd_search}" /></span>
+            <a href="{getUrl('s_mid','','s_browser_title','','page','')}" class="button black"><span>{$lang->cmd_cancel}</span></a>
+        </fieldset>
+</form>
+
+<!-- 목록 -->
+<form action="./" method="get" onsubmit="return doChangeCategory(this);" id="fo_list">
+<div class="table">
+	<table width="100%" cellspacing="0" border="1">
+		<caption>Total {number_format($total_count)}, Page {number_format($page)}/{number_format($total_page)}</caption>
+		<thead>
+			<tr>
+				<th scope="col"><div>{$lang->no}</div></th>
+				<th scope="col"><div><input type="checkbox" onclick="XE.checkboxToggleAll(); return false;" /></div></th>
+				<th scope="col" width="15%">
+					<div>
+						<input type="hidden" name="module" value="{$module}" />
+						<input type="hidden" name="act" value="{$act}" />
+						<select name="module_category_srl">
+							<option value="">{$lang->module_category}</option>
+							<option value="0" selected="selected"|cond="$module_category_srl==0">{$lang->not_exists}</option>
+							<option loop="$module_category => $key, $val" value="{$key}"  selected="selected"|cond="$module_category_srl==$key">{$val->title}</option>
+							<option value="">---------</option>
+							<option value="-1">{$lang->cmd_management}</option>
+						</select>
+						<input type="submit" name="go_button" id="go_button" value="GO" class="buttonTypeGo" />
+					</div>
+				</th>
+				<th scope="col" width="20%">{$lang->mid}</th>
+				<th scope="col">{$lang->browser_title}</th>
+				<th scope="col">{$lang->regdate}</th>
+				<th scope="col">&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr loop="$faq_list => $no,$val">
+				<td>{$no}</td>
+				<td><input type="checkbox" name="cart" value="{$val->module_srl}" /></td>
+				<td>
+					<!--@if(!$val->module_category_srl)-->
+						<!--@if($val->site_srl)-->
+						{$lang->virtual_site}
+						<!--@else-->
+						{$lang->not_exists}
+						<!--@end-->
+					<!--@else-->
+						{$module_category[$val->module_category_srl]->title}
+					<!--@end-->
+				</td>
+				<td>{htmlspecialchars($val->mid)}</td>
+				<td><a href="{getSiteUrl($val->domain,'','mid',$val->mid)}" onclick="window.open(this.href); return false;">{$val->browser_title}</a></td>
+				<td>{zdate($val->regdate,"Y-m-d")}</td>
+				<td>
+					<a href="{getUrl('act','dispFaqAdminFaqInfo','module_srl',$val->module_srl)}" class="buttonSet buttonSetting" title="{$lang->cmd_setup}"><span>{$lang->cmd_setup}</span></a>
+					<a href="{getUrl('','module','module','act','dispModuleAdminCopyModule','module_srl',$val->module_srl)}" onclick="popopen(this.href);return false;" class="buttonSet buttonCopy" title="{$lang->cmd_copy}"><span>{$lang->cmd_copy}</span></a>
+					<a href="{getUrl('act','dispFaqAdminDeleteFaq','module_srl', $val->module_srl)}" class="buttonSet buttonDelete" title="{$lang->cmd_delete}"><span>{$lang->cmd_delete}</span></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- 버튼 -->
+<div class="btnArea">
+    <div class="etc">
+        <a href="{getUrl('','module','module','act','dispModuleAdminModuleSetup')}" onclick="doCartSetup(this.href); return false;" class="button green"><span>{$lang->cmd_setup}</span></a>
+        <a href="{getUrl('','module','module','act','dispModuleAdminModuleAdditionSetup')}" onclick="doCartSetup(this.href); return false;" class="button red"><span>{$lang->cmd_addition_setup}</span></a>
+    </div>
+    <a href="{getUrl('act','dispFaqAdminInsertFaq','module_srl','')}" class="button black strong"><span>{$lang->cmd_make}</span></a>
+</div>
+
+</form>
+
+

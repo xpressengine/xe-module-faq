@@ -1,0 +1,12 @@
+<query id="updateQuestionPositive" action="update">
+    <tables>
+        <table name="faq_questions" />
+    </tables>
+    <columns>
+        <column name="positive" var="positive" />
+		<column name="votes" var="votes" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="question_srl" var="question_srl" notnull="notnull" />
+    </conditions>
+</query>

@@ -1,0 +1,13 @@
+<query id="getSubCategoryListByDepth" action="select">
+    <tables>
+        <table name="faq_categories" />
+    </tables>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" notnull="notnull" />
+		<condition operation="equal" column="parent_srl" var="parent_srl"  notnull="notnull" pipe="and"/>
+		<condition operation="equal" column="depth" var="depth"  notnull="notnull" pipe="and"/>
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="list_order" order="asc" />
+    </navigation>
+</query>

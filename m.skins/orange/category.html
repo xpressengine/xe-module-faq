@@ -1,0 +1,21 @@
+<include target="_header.html" />
+<header class="mod_head">
+    <h2 class="mod_title">FAQ</h2>
+    <button class="btn_srch">search</button>
+    <form action="./" method="get" id="fo_search" class="srch">
+        <fieldset>
+        <legend>검색</legend>
+            <input cond="$vid" type="hidden" name="vid" value="{$vid}" />
+            <input type="hidden" name="mid" value="{$mid}" />
+            <input type="hidden" name="category" value="{htmlspecialchars($category)}" />
+            <span><input id="searchkey" name="search_keyword" value="{htmlspecialchars($search_keyword)}" type="search" placeholder="Search..." title="{$lang->cmd_search}" /></span>
+        </fieldset>
+    </form>
+</header>
+
+<ul class="cg_list">
+<li class=""><a href="{getUrl('','mid',$mid, 'category', 'all')}">All Categories</a><i class="icon_arr_cg"></i></li>
+<block loop="$category_list => $val">
+<li class="on"|cond="$val->category_srl == Context::get('category')"><a href="{getUrl('','mid',$mid,'category',$val->category_srl)}">{$val->title}</a><i class="icon_arr_cg"></i></li>
+</block>
+</ul>

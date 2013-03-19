@@ -1,0 +1,20 @@
+<include target="_header.html" />
+
+<div class="smallBox w268">
+    <div class="header">
+        <h3>{$lang->confirm_delete}</h3>
+    </div>
+    <form action="./" method="get" id="fo_faq_delete_question" ruleset="deleteQuestion">
+    <input type="hidden" name="act" value="procFaqDeleteQuestion" />
+    <input type="hidden" name="mid" value="{$mid}" />
+    <input type="hidden" name="page" value="{$page}" />
+    <input type="hidden" name="question_srl" value="{$question_srl}" />
+
+    <div class="inputPassword tCenter" style="float:right">
+    	<span class="btn"><input type="submit" value="{$lang->cmd_delete}" accesskey="s" /></span>
+        <a href="{getUrl('act','')}" class="btn"><span>{$lang->cmd_cancel}</span></a>
+    </div>
+    </form>
+</div>
+
+<include target="_footer.html" />

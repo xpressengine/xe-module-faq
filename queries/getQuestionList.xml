@@ -1,0 +1,27 @@
+<query id="getQuestionList" action="select">
+    <tables>
+        <table name="faq_questions" />
+    </tables>
+    <columns>
+        <column name="*" />
+    </columns>
+    <conditions>
+        <condition operation="in" column="module_srl" var="module_srl" filter="number" />
+        <condition operation="notin" column="module_srl" var="exclude_module_srl" filter="number" pipe="and" />
+        <condition operation="in" column="category_srl" var="category_srl" pipe="and" />
+        <group pipe="and">
+            <condition operation="more" column="list_order" var="division" pipe="and" />
+            <condition operation="below" column="list_order" var="last_division" pipe="and" />
+        </group>
+        <group pipe="and">
+            <condition operation="like" column="question" var="s_question" />
+            <condition operation="like" column="answer" var="s_answer" pipe="or" />
+        </group>
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="list_order" order="order_type" />
+        <list_count var="list_count" default="20" />
+        <page_count var="page_count" default="10" />
+        <page var="page" default="1" />
+    </navigation>
+</query>

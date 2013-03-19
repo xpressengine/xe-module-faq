@@ -1,0 +1,39 @@
+{@ Context::addJsFile("./common/js/jquery.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/js_app.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/common.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_handler.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_js_filter.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/x.min.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xe.min.js", true, '', -100000) }
+
+<include target="_header.html" />
+<header class="mod_head">
+    <h2 class="mod_title">FAQ</h2>
+    <a href="{getUrl('','mid',$mid)}" class="btn_back" >Back</a>
+    <button class="btn_srch">search</button>
+    <form action="./" method="get" id="fo_search" class="srch">
+        <fieldset>
+        <legend>Search</legend>
+            <input cond="$vid" type="hidden" name="vid" value="{$vid}" />
+            <input type="hidden" name="mid" value="{$mid}" />
+            <input type="hidden" name="category" value="{htmlspecialchars($category)}" />
+            <span><input id="searchkey" name="search_keyword" value="{htmlspecialchars($search_keyword)}" type="search" placeholder="Search..." title="{$lang->cmd_search}" /></span>
+        </fieldset>
+    </form>
+</header>
+
+<dl class="p_list" id="p_list">
+<block loop="$question_list => $question_index, $question">
+<dt id="q_a_link_{$question_index}" class="q clse"><a href="#" onclick="return false;">{$question->question}</a></dt>
+<dd id="qAnswer_{$question_index}" class="a"><div class="answer">{$question->answer}</div></dd>
+</block>
+</dl>
+<div class="list_btm">
+    <a href="#" onclick="return false;"class="more" id="more_view">More<i class="icon_arrow_dn"></i></a>
+    <a href="#ct" class="top">Top</a>
+</div>
+
+<script type="text/javascript">
+	window.mid = '{$mid}';
+	window.category = '{$category}';
+</script>

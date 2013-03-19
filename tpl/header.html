@@ -1,0 +1,22 @@
+<load target="js/faq_admin.js" />
+<load target="css/layout_admin.css" />
+
+<h1 class="h1">{$lang->faq_management}</h3>
+
+<p>{nl2br($lang->about_faq)}</p>
+
+<h2 cond="$module_info->mid" class="h2">{$module_info->mid} <span cond="$module_info->is_default=='Y'" class="bracket">({$lang->is_default})</span> <span class="vr">|</span> <a href="{getSiteUrl($module_info->domain,'','mid',$module_info->mid)}" onclick="window.open(this.href); return false;" class="view">View</a></h2>
+
+<div class="cnb">
+	<ul>
+		<li cond="$module=='admin'" class="active"|cond="$act=='dispFaqAdminContent'"><a href="{getUrl('act','dispFaqAdminContent','module_srl','')}">{$lang->cmd_faq_list}</a></li>
+		<li><a href="{getUrl('act','')}">{$lang->cmd_list}</a></li>
+		<li class="active"|cond="$act=='dispFaqAdminFaqInfo'||$act=='dispFaqAdminInsertFaq'"><a href="{getUrl('act','dispFaqAdminFaqInfo')}"><!--@if($module_srl)-->{$lang->cmd_view_info}<!--@else-->{$lang->cmd_create_faq}<!--@end--></a></li>
+
+		<block cond="$module_srl">
+		<li class="active"|cond="$act=='dispFaqAdminCategoryInfo'"><a href="{getUrl('act','dispFaqAdminCategoryInfo')}">{$lang->cmd_manage_category}</a></li>
+		<li class="active"|cond="$act=='dispFaqAdminFaqAdditionSetup'"><a href="{getUrl('act','dispFaqAdminFaqAdditionSetup')}">{$lang->cmd_addition_setup}</a></li>
+		<li class="active"|cond="$act=='dispFaqAdminGrantInfo'"><a href="{getUrl('act','dispFaqAdminGrantInfo')}">{$lang->cmd_manage_grant}</a></li>
+		</block>
+	</ul>
+</div>

@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="faq">
+		<value xml:lang="ko"><![CDATA[FAQ]]></value>
+		<value xml:lang="en"><![CDATA[FAQ]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ]]></value>
+	</item>
+	<item name="faq_management">
+		<value xml:lang="ko"><![CDATA[FAQ 관리]]></value>
+		<value xml:lang="en"><![CDATA[FAQ Management]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ 管理]]></value>
+	</item>
+	<item name="about_faq">
+		<value xml:lang="ko"><![CDATA[FAQ페이지를 생성하고 관리하는 모듈입니다.]]></value>
+		<value xml:lang="en"><![CDATA[This module is for creating and managing FAQs.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[此模块用于搭建和管理FAQ页面.]]></value>
+	</item>
+	<item name="cmd_faq_list">
+		<value xml:lang="ko"><![CDATA[FAQ 리스트]]></value>
+		<value xml:lang="en"><![CDATA[FAQ List]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ 列表]]></value>
+	</item>
+	<item name="cmd_view_info">
+		<value xml:lang="ko"><![CDATA[FAQ 정보]]></value>
+		<value xml:lang="en"><![CDATA[FAQ Info]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ 信息]]></value>
+	</item>
+	<item name="cmd_create_faq">
+		<value xml:lang="ko"><![CDATA[FAQ 생성]]></value>
+		<value xml:lang="en"><![CDATA[Create a new FAQ]]></value>
+		<value xml:lang="zh-CN"><![CDATA[新建 FAQ]]></value>
+	</item>
+	<item name="order_target">
+		<value xml:lang="ko"><![CDATA[정렬]]></value>
+		<value xml:lang="en"><![CDATA[Sorting Target]]></value>
+		<value xml:lang="zh-CN"><![CDATA[排序]]></value>
+	</item>
+	<item name="question_srl">
+		<value xml:lang="ko"><![CDATA[Question No.]]></value>
+		<value xml:lang="en"><![CDATA[Question No.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[Question No.]]></value>
+	</item>
+	<item name="order_asc">
+		<value xml:lang="ko"><![CDATA[오름차순]]></value>
+		<value xml:lang="en"><![CDATA[Ascending order]]></value>
+		<value xml:lang="zh-CN"><![CDATA[递增排序]]></value>
+	</item>
+	<item name="order_desc">
+		<value xml:lang="ko"><![CDATA[내림차순]]></value>
+		<value xml:lang="en"><![CDATA[Descending order]]></value>
+		<value xml:lang="zh-CN"><![CDATA[递减排序]]></value>
+	</item>
+	<item name="list_count">
+		<value xml:lang="ko"><![CDATA[FAQ 수]]></value>
+		<value xml:lang="en"><![CDATA[Question Count]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ数量]]></value>
+	</item>
+	<item name="about_list_count">
+		<value xml:lang="ko"><![CDATA[한 페이지에서 최대 표시되는 FAQ 수를 설정합니다.(기본20개)]]></value>
+		<value xml:lang="en"><![CDATA[You can set the number of limit to show question in a page (default is 20).]]></value>
+		<value xml:lang="zh-CN"><![CDATA[设置每个页面显示的FAQ数量 (默认为 20).]]></value>
+	</item>
+	<item name="search_list_count">
+		<value xml:lang="ko"><![CDATA[FAQ 검색 결과 수]]></value>
+		<value xml:lang="en"><![CDATA[Search Question Count]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ搜索数量]]></value>
+	</item>
+	<item name="about_search_list_count">
+		<value xml:lang="ko"><![CDATA[한 페이지에 대한 검색 결과 수를 설정합니다.(기본20개)-예:검색결과가100개이면 5페이지에 걸쳐서 보여집니다.]]></value>
+		<value xml:lang="en"><![CDATA[You may set the number of questions to be exposed when you use search or category function (default is 20).]]></value>
+		<value xml:lang="zh-CN"><![CDATA[设置每个页面显示的FAQ数量 ，当使用搜索和分类查询功能时 (默认为 20).]]></value>
+	</item>
+	<item name="about_page_count">
+		<value xml:lang="ko"><![CDATA[페이징에 대한 값을 설정합니다.(기본 10페이지).]]></value>
+		<value xml:lang="en"><![CDATA[You can set the number of page link to move pages in a bottom of page (default is 10).]]></value>
+		<value xml:lang="zh-CN"><![CDATA[设置分页栏显示的页面数 (默认为 10).]]></value>
+	</item>
+	<item name="about_description">
+		<value xml:lang="ko"><![CDATA[FAQ페이지 설명]]></value>
+		<value xml:lang="en"><![CDATA[It is the description for this FAQ module]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ页面描述]]></value>
+	</item>
+	<item name="allow_keywords">
+		<value xml:lang="ko"><![CDATA[키워드 사용여부]]></value>
+		<value xml:lang="en"><![CDATA[Allow Keywords]]></value>
+		<value xml:lang="zh-CN"><![CDATA[使用Keywords]]></value>
+	</item>
+	<item name="about_allow_keywords">
+		<value xml:lang="ko"><![CDATA[키워드 사용으로 설정할 경우사용자에게 키워드 검색을 제공합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Users will be able to use recommended keywords in search function.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[用户能够使用关键字查询功能。]]></value>
+	</item>
+	<item name="faq_keywords">
+		<value xml:lang="ko"><![CDATA[키워드]]></value>
+		<value xml:lang="en"><![CDATA[Keywords]]></value>
+		<value xml:lang="zh-CN"><![CDATA[Keywords]]></value>
+	</item>
+	<item name="about_faq_keywords">
+		<value xml:lang="ko"><![CDATA[콤마(,)를 이용해 여러개의 키워드를 입력하실 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Set keywords of the module, multiple keywords are separated by comma(,).]]></value>
+		<value xml:lang="zh-CN"><![CDATA[设置关键字，多个关键字用逗号（，）分开.]]></value>
+	</item>
+	<item name="all_categories">
+		<value xml:lang="ko"><![CDATA[분류 전체]]></value>
+		<value xml:lang="en"><![CDATA[ALL Categories]]></value>
+		<value xml:lang="zh-CN"><![CDATA[所有分类]]></value>
+	</item>
+	<item name="question_title">
+		<value xml:lang="ko"><![CDATA[질문]]></value>
+		<value xml:lang="en"><![CDATA[Question]]></value>
+		<value xml:lang="zh-CN"><![CDATA[问题]]></value>
+	</item>
+	<item name="answer_title">
+		<value xml:lang="ko"><![CDATA[답]]></value>
+		<value xml:lang="en"><![CDATA[Answer]]></value>
+		<value xml:lang="zh-CN"><![CDATA[答案]]></value>
+	</item>
+	<item name="category">
+		<value xml:lang="ko"><![CDATA[FAQ 분류]]></value>
+		<value xml:lang="en"><![CDATA[FAQ Category]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ 分类]]></value>
+	</item>
+	<item name="category_question_count">
+		<value xml:lang="ko"><![CDATA[분류 질문 수]]></value>
+		<value xml:lang="en"><![CDATA[Question Count]]></value>
+		<value xml:lang="zh-CN"><![CDATA[分类问题数量]]></value>
+	</item>
+	<item name="question_count">
+		<value xml:lang="ko"><![CDATA[질문 수]]></value>
+		<value xml:lang="en"><![CDATA[Question Count]]></value>
+		<value xml:lang="zh-CN"><![CDATA[问题数量]]></value>
+	</item>
+	<item name="faq_categories">
+		<value xml:lang="ko"><![CDATA[FAQ 분류]]></value>
+		<value xml:lang="en"><![CDATA[FAQ Categories]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ 类别]]></value>
+	</item>
+	<item name="faq_category">
+		<value xml:lang="ko"><![CDATA[FAQ 분류]]></value>
+		<value xml:lang="en"><![CDATA[FAQ Category]]></value>
+		<value xml:lang="zh-CN"><![CDATA[FAQ 分类]]></value>
+	</item>
+	<item name="total_category_result">
+		<value xml:lang="ko"><![CDATA[<strong>%d</strong> 의FAQ 분류가 사용됨]]></value>
+		<value xml:lang="en"><![CDATA[Total <strong>%d</strong> FAQ categories are used.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[总共有 <strong>%d</strong> 个FAQ 分类 被使用.]]></value>
+	</item>
+	<item name="question_number">
+		<value xml:lang="ko"><![CDATA[질문 수]]></value>
+		<value xml:lang="en"><![CDATA[Number of Questions]]></value>
+		<value xml:lang="zh-CN"><![CDATA[问题数量]]></value>
+	</item>
+	<item name="category_name">
+		<value xml:lang="ko"><![CDATA[분류명]]></value>
+		<value xml:lang="en"><![CDATA[Category]]></value>
+		<value xml:lang="zh-CN"><![CDATA[分类]]></value>
+	</item>
+	<item name="cmd_create">
+		<value xml:lang="ko"><![CDATA[생성]]></value>
+		<value xml:lang="en"><![CDATA[Create]]></value>
+		<value xml:lang="zh-CN"><![CDATA[新建]]></value>
+	</item>
+	<item name="none_categoriess">
+		<value xml:lang="ko"><![CDATA[생성된 FAQ 분류가 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[There is no FAQ categories.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[没有生成的 FAQ 分类.]]></value>
+	</item>
+	<item name="cmd_sub_category">
+		<value xml:lang="ko"><![CDATA[서브 카테고리 추가]]></value>
+		<value xml:lang="en"><![CDATA[Add Sub Category]]></value>
+		<value xml:lang="zh-CN"><![CDATA[添加子分类]]></value>
+	</item>
+	<item name="sub_category_name">
+		<value xml:lang="ko"><![CDATA[서브 카테고리]]></value>
+		<value xml:lang="en"><![CDATA[Sub Category]]></value>
+		<value xml:lang="zh-CN"><![CDATA[子分类]]></value>
+	</item>
+	<item name="allow_vote">
+		<value xml:lang="ko"><![CDATA[추천/비추 사용여부]]></value>
+		<value xml:lang="en"><![CDATA[Enable Vote]]></value>
+		<value xml:lang="zh-CN"><![CDATA[使用投票功能]]></value>
+	</item>
+	<item name="about_allow_vote">
+		<value xml:lang="ko"><![CDATA[게시물에 추천 / 비추천 투표가 가능합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Users will be able to declare 'helpful or 'helpless' for each FAQ.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[用户可以对每个FAQ声明 ‘有用’ 或 ‘无用’。]]></value>
+	</item>
+	<item name="helpful">
+		<value xml:lang="ko"><![CDATA[추천]]></value>
+		<value xml:lang="en"><![CDATA[Helpful]]></value>
+		<value xml:lang="zh-CN"><![CDATA[有用]]></value>
+	</item>
+	<item name="helpless">
+		<value xml:lang="ko"><![CDATA[비추천]]></value>
+		<value xml:lang="en"><![CDATA[Helpless]]></value>
+		<value xml:lang="zh-CN"><![CDATA[无用]]></value>
+	</item>
+	<item name="vote_success">
+		<value xml:lang="ko"><![CDATA[투표해주셔서 감사합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Thank you for your vote!]]></value>
+		<value xml:lang="zh-CN"><![CDATA[谢谢你的投票！]]></value>
+	</item>
+	<item name="vote_failed">
+		<value xml:lang="ko"><![CDATA[이미 투표하신 게시물입니다.]]></value>
+		<value xml:lang="en"><![CDATA[You have voted this question already, please don't vote again]]></value>
+		<value xml:lang="zh-CN"><![CDATA[你已经对这个问题投过票了，请不要继续投票]]></value>
+	</item>
+</lang>

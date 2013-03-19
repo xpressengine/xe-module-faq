@@ -1,0 +1,92 @@
+<load target="css/faq.css" />
+<load target="js/skin.js" />
+
+<div class="faq_cont">
+<div class="tab_list m1">
+    <ul cond="$module_info->use_category=='Y'" id="top_category" class="top_category">
+        <li class="li_tab m1"|cond="!Context::get('category')" class="li_tab m2"|cond="Context::get('category')"><a href="{getUrl('','mid',$mid)}" class="tab_a"><span>All Categories</span></a></li>
+        <block loop="$category_list => $key, $val">
+        <li data="{$val->category_srl}" class="li_tab m1"|cond="$val->category_srl == Context::get('category') || $val->category_srl  ==  Context::get('topcategory')" class="li_tab m2"|cond="$val->category_srl != Context::get('category') && $val->category_srl != Context::get('topcategory')">
+            <a href="{getUrl('','mid',$mid,'category',$val->category_srl)}" class="tab_a"><span>{$val->title}</span></a>
+            {@ $oFaqModel = &getModel('faq');
+			  $depth =  $oFaqModel->getHighestCategoryDepth($val->module_srl, $val->category_srl);
+              $subCategories_1 = $oFaqModel->getSubCategoryListByDepth($val->module_srl, $val->category_srl,1);
+            }
+            <div id="popup{$val->category_srl}" class="popover_cate" cond="$subCategories_1">
+                <span class="arr"></span>
+                <!--opt1: only has first level subcategories -->
+                <ul class='subcate_ul_h' cond="$subCategories_1&&$depth<2">
+					<li loop="$subCategories_1 =>$key1,$val1"  class="cat_on"|cond="$val1->category_srl == Context::get('category')" class="subcate_list"|cond="$val1->category_srl != Context::get('category')">
+						<a href="{getUrl('','mid',$mid,'category',$val1->category_srl,'topcategory',$val->category_srl)}" >{$val1->title}</a>
+					</li>
+                </ul> 
+
+                <!-- opt2: only has second level subcategories -->
+                <ul class="subcate_ul_v" cond="$subCategories_1&&$depth>1" >
+                    <li class="row" loop="$subCategories_1 =>$key2,$val2" >
+                        <dl>
+                        <dt class="cat_on"|cond="$val2->category_srl == Context::get('category') || $val2->category_srl == Context::get('secategory')" class="cg_L2"|cond="$val2->category_srl != Context::get('category') && $val2->category_srl != Context::get('secategory')"><a  href="{getUrl('','mid',$mid,'category',$val2->category_srl,'topcategory',$val->category_srl)}">{$val2->title}</a></dt>
+                        <dd class="cg_L3">
+						{@$subCategories_2 = $oFaqModel->getSubCategoryListByDepth($val->module_srl, $val2->category_srl,2);
+						}
+                        <ul>
+                        <li loop="$subCategories_2 =>$key3, $val3" class="cat_on"|cond="$val3->category_srl == Context::get('category')" ><a href="{getUrl('','mid',$mid,'category',$val3->category_srl,'topcategory',$val->category_srl,'secategory',$val2->category_srl)}">{$val3->title}</a></li>
+						<li cond="!$subCategories_2" >&nbsp;</li>
+                        </ul>
+                        </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div> <!-- //popover_cate -->
+        </li>
+        </block>
+		<li class="sort_opt" cond="$module_info->allow_vote == 'Y'" >
+			<select id="sort_option"">
+				<option value="regdate"  <!--@if($sort_index=='regdate')-->selected<!--@end-->>Sort by date</option>
+				<option value="positive" <!--@if($sort_index=='positive')-->selected<!--@end-->>Sort by vote</option>
+			</select>
+		</li>
+        <li class="t_num">Total<em>{$total_count}</em></li>
+    </ul>
+</div>
+
+<ul class="faq_lst">
+    <block loop="$question_list => $question_index, $question">
+        <li id="q_li_link_{$question_index}" class="off"><a id="qlink_{$question_index}" href="#q_a_link_{$question_index}" class="title">{$question->question}</a><a id="q_a_link_{$question_index}" href="#q_a_link_{$question_index}" class="btn_show"></a>
+            <div id="qAnswer_{$question_index}" class="a_cont" >
+                {$question->answer}
+                <p cond="$oQuestion->isEditable()" class="btn_del_mod">
+                    <a href="{getUrl('act','dispFaqWrite','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_modify}</span></a>
+                    <a href="{getUrl('act','dispFaqDelete','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_delete}</span></a>
+                </p>
+				<div class="vote_btn" cond="$module_info->allow_vote == 'Y'">
+					<a href="#" class="vote t-up" id="btn_useful{$question->question_srl}" data="{$question->get('positive')}" onclick="voteFaq({$question->question_srl},'positive'); return false;" ><i class="up"></i>{$lang->helpful}({$question->get('positive')})</a>
+					<a href="#" class="vote t-down"  id="btn_useless{$question->question_srl}" data="{$question->get('negative')}" onclick="voteFaq({$question->question_srl},'negative'); return false;" ><i class="down"></i>{$lang->helpless}({$question->get('negative')})</a>
+				</div>
+            </div>  
+        </li>
+    </block>
+</ul>
+
+</div>
+{@ 
+	$vote_success = $lang->vote_success;
+	$vote_failed = $lang->vote_failed;
+}
+<script type="text/javascript">
+	var mid = '{$mid}';
+	var category = '{$category}';
+	window.vote_success = '{$vote_success}';
+	window.vote_failed = '{$vote_failed}';
+
+  
+	jQuery(function($){
+		$('select#sort_option').change(function(){
+			var opt = $(this).find('option:selected').attr('value');
+			var url = "";
+			url ="{getUrl('')}"+'?mid='+mid+'&sort_index='+opt+'&category='+category;
+			if(opt=='positive') url += '&order_type=desc';
+			location.href=url;
+		})
+	});
+</script>

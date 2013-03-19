@@ -1,0 +1,166 @@
+@charset "utf-8";
+
+.contentHeader.categoryHeader {
+
+	vertical-align: top;
+}
+
+.contentHeader .h3 {
+    font-size: 14px;
+    margin: 0;
+
+}
+
+.contentHeader {
+    background: url("../img/iconH3.gif") no-repeat scroll left center transparent;
+    height: 28px;
+    padding: 0px 0 6px;
+    position: relative;
+}
+
+.categoryList .summary {
+    color: #555555;
+    font-size: 12px;
+    margin: 0 0 10px;
+}
+
+.categoryList .summary strong {
+    color: #EA3F22;
+}
+
+.categoryList .tSum {
+    border-top: 2px solid #CBD4DF !important;
+    float: left;
+    margin-bottom: 50px;
+    width: 38%;
+	zoom:1;
+	padding:0;
+}
+
+fieldset {
+    border: 0 none;
+}
+
+.categoryList .tSum .tHeader label {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #555555;
+    cursor: default;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0;
+}
+
+.categoryList .tSum .tHeader {
+    border-left: 1px solid #E3E5E7;
+    border-right: 1px solid #E3E5E7;
+    padding: 8px 15px;
+	overflow:hidden;
+	zoom:1;
+}
+
+.categoryList .tSum .tHeader .aLeft{ float:left}
+
+.categoryList .tSum .tHeader .aRight {
+    float: right;
+}
+
+.categoryList .tSum ul {
+    border: 1px solid #E3E5E7;
+    font-size: 12px;
+    height: 360px;
+    list-style: none outside none;
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+    position: relative;
+}
+
+.categoryList .tSum li {
+    border-bottom: 1px solid #E3E5E7;
+    border-top: 1px solid #E3E5E7;
+    margin: -1px 0;
+    padding: 8px 0;
+    position: relative;
+    text-indent: 15px;
+}
+
+.categoryList .tSum li .tWord {
+    color: #648AB9;
+    font-weight: bold;
+    text-decoration: none;
+} 
+
+.categoryList .tSum li {
+    text-indent: 15px;
+}
+
+.categoryList .tSum li .sum {
+    color: #EA3F22;
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    right: 20px;
+    top: 8px;
+    white-space: nowrap;
+}
+
+.categoryList .tModify {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #EDEFF1;
+    float: right;
+    font-size: 12px;
+    width: 59%;
+    padding-bottom:0;
+}
+
+.categoryList .tModify .tagName {
+    border-bottom: 1px solid #EDEFF1;
+    margin: 0 0 -1px;
+    padding: 15px 0 15px 25px;
+}
+.categoryList .tModify dd span.cgBtn button{height:24px;}
+.categoryList .tModify .tagName dd {
+    display: inline;
+    margin: 0;
+}
+
+.categoryList .tModify dt {
+    color: #868D95;
+    font-weight: bold;
+    display:inline-block;
+    float:left;
+    padding-top:3px;
+}
+
+.categoryList .tModify .tagName .inputText {
+    border: 1px solid #C6C6C6;
+    color: #555555;
+    font-size: 12px;
+    height: 15px;
+    padding: 3px 4px;
+    vertical-align: top;
+    width: 200px;
+    margin-left:5px;
+}
+
+.categoryList .tSum li.hover {
+    background: none repeat scroll 0 0 #F5F5F5;
+}
+
+.faq_search_form{}
+.faq_search_form fieldset{padding:6px 10px;vertical-align:text-top;}
+.faq_search_form .inputTypeText{height:20px;border:1px solid #B7B7B7;}
+.faq_search_form fieldset label{display:inline-block;vertical-align:top;padding:5px 5px 0 5px;}
+.faq_search_form fieldset span.button{height:25px;overflow:hidden;}
+
+div.table input.inputTypeText{width:280px;margin:2px 0;border:1px solid #b7b7b7;border-right-color:#e1e1e1;border-bottom-color:#e1e1e1;}
+fieldset.tModify legend{display:none;}
+fieldset.tModify dl{margin-bottom:20px;}
+
+#subCat {margin-top:5px; display:none}
+
+.replyIndent {
+    background: url("../img/iconReplyArrow.gif") no-repeat scroll 0 0.3em transparent;
+    padding-left: 0.1em;
+}

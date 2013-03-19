@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+    <grants />
+    <permissions>
+		<permission action="dispFaqAdminInsertFaq" target="manager" />
+		<permission action="dispFaqAdminFaqInfo" target="manager" />
+        <permission action="dispFaqAdminFaqAdditionSetup" target="manager" />
+
+	    <permission action="getFaqCategoryTplInfo" target="member" />
+
+		<permission action="procFaqAdminInsertFaq" target="manager" />
+        <permission action="procFaqInsertCategory" target="member" />
+	    <permission action="procFaqMoveCategory" target="member" />
+        <permission action="procFaqDeleteCategory" target="member" />
+    </permissions>
+    <actions>
+		<action name="dispFaqAdminContent" type="view" standalone="true" admin_index="true" />
+		<action name="dispFaqAdminInsertFaq" type="view" standalone="true" setup_index="true" />
+        <action name="dispFaqAdminDeleteFaq" type="view" standalone="true" />
+		<action name="dispFaqAdminFaqInfo" type="view" standalone="true" />
+		<action name="dispFaqAdminCategoryInfo" type="view" />
+        <action name="dispFaqAdminFaqAdditionSetup" type="view" standalone="true" />
+		<action name="dispFaqAdminGrantInfo" type="view" standalone="true" />
+        <action name="dispFaqWrite" type="view" />
+        <action name="dispFaqDelete" type="view" />
+
+        <action name="dispFaqContent" type="view" index="true" />
+
+        <action name="getFaqCategoryTplInfo" type="model" standalone="true" />
+
+		<action name="procFaqAdminInsertFaq" type="controller" standalone="true" ruleset="insertFaq"/>
+        <action name="procFaqAdminDeleteFaq" type="controller" standalone="true" ruleset="deleteFaq"/>
+        <action name="procFaqInsertCategory" type="controller" standalone="true" />
+        <action name="procFaqMoveCategory" type="controller" standalone="true" />
+        <action name="procFaqDeleteCategory" type="controller" standalone="true" />
+        <action name="procFaqInsertQuestion" type="controller" ruleset="insertQuestion"/>
+        <action name="procFaqDeleteQuestion" type="controller" ruleset="deleteQuestion"/>
+
+		<action name="proGetQuesList" type="controller" standalone="true" />
+		<action name="procFaqVote" type="controller" standalone="true" />
+
+    </actions>
+</module>
