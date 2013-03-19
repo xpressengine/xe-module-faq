@@ -20,7 +20,7 @@
 		<value xml:lang="en"><![CDATA[FAQ List]]></value>
 		<value xml:lang="zh-CN"><![CDATA[FAQ 列表]]></value>
 	</item>
-	<item name="cmd_view_info">
+	<item name="cmd_faq_info">
 		<value xml:lang="ko"><![CDATA[FAQ 정보]]></value>
 		<value xml:lang="en"><![CDATA[FAQ Info]]></value>
 		<value xml:lang="zh-CN"><![CDATA[FAQ 信息]]></value>
@@ -141,7 +141,7 @@
 		<value xml:lang="zh-CN"><![CDATA[FAQ 分类]]></value>
 	</item>
 	<item name="total_category_result">
-		<value xml:lang="ko"><![CDATA[<strong>%d</strong> 의FAQ 분류가 사용됨]]></value>
+		<value xml:lang="ko"><![CDATA[<strong>%d</strong> FAQ 분류가 사용됨]]></value>
 		<value xml:lang="en"><![CDATA[Total <strong>%d</strong> FAQ categories are used.]]></value>
 		<value xml:lang="zh-CN"><![CDATA[总共有 <strong>%d</strong> 个FAQ 分类 被使用.]]></value>
 	</item>
@@ -166,12 +166,12 @@
 		<value xml:lang="zh-CN"><![CDATA[没有生成的 FAQ 分类.]]></value>
 	</item>
 	<item name="cmd_sub_category">
-		<value xml:lang="ko"><![CDATA[서브 카테고리 추가]]></value>
+		<value xml:lang="ko"><![CDATA[하위분류 추가]]></value>
 		<value xml:lang="en"><![CDATA[Add Sub Category]]></value>
 		<value xml:lang="zh-CN"><![CDATA[添加子分类]]></value>
 	</item>
 	<item name="sub_category_name">
-		<value xml:lang="ko"><![CDATA[서브 카테고리]]></value>
+		<value xml:lang="ko"><![CDATA[하위분류]]></value>
 		<value xml:lang="en"><![CDATA[Sub Category]]></value>
 		<value xml:lang="zh-CN"><![CDATA[子分类]]></value>
 	</item>

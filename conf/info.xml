@@ -6,10 +6,9 @@
     <description xml:lang="ko">사용자에게 자주 하는 질문에 대한 대답을 제공하는것으로, FAQ에 대해 추가,수정,삭제가 가능합니다.</description>
     <description xml:lang="zh-CN">给用户提供相应FAQ功能，将包含FAQ的生成/删除及FAQ管理等管理员功能。</description>
     <description xml:lang="en">Provide FAQ module to XE users, contains administrator functions such as create, delete, manage FAQ etc.</description>
-    <version>1.6.0.3</version>
-    <date>2012-11-09</date>
+    <version>1.7.0</version>
+    <date>2013-13-19</date>
     <category>service</category>
-
     <author email_address="developers@xpressengine.com" link="http://xpressengine.com/">
         <name xml:lang="ko">NHN</name>
         <name xml:lang="zh-CN">NHN</name>

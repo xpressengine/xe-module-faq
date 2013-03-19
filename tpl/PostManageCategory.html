@@ -1,84 +1,84 @@
 <include target="header.html" />
-<div id="content_faq_categories">
-
-	<div class="contentHeader categoryHeader">
-		<h3 class="h3">{$lang->faq_categories}</h3>
-	</div>
-
-	<form method="post" class="categoryList" onsubmit="return false">
-
-		<p class="summary">{sprintf($lang->total_category_result, $category_list_count)}</p>
-	
-		<fieldset class="tSum">
-			<div class="tHeader">
-				<span class="aLeft"> <label class="tagSort">{$lang->faq_category} </label></span>
-				<span class="aRight"><label>{$lang->question_number}</label></span>
-			</div>
-			
-			<ul cond="!$faq_category_list" id="tag_list">
-				<li class="noTag"><span>{$lang->none_categoriess}</span></li>
-			</ul>
-			<ul cond="$faq_category_list" id="tag_list">
-				<li loop="$faq_category_list => $k,$category" class="hover"|cond="$category->title==$selected_category->title">
-					<!--@if($category->depth)-->
-					<div style="margin-left:{($category->depth)*15}px" class="replyIndent">
-					<!--@end-->
-					<a href="{getUrl('category_srl',$category->category_srl)}" class="tWord">{$category->title}</a> <span class="sum">{$category->question_count}</span>
-				</li>
-			</ul>
-			
-		</fieldset>
-
-		<fieldset class="tModify">
-			<legend>{$lang->update_tag}</legend>
-			<dl class="tagName">
-				<dt>{$lang->category_name} :</dt>
-				<dd>
-				<input name="category_title" type="text" class="inputText" value="{$selected_category->title}" /> 
+<form method="post" class="categoryList" onsubmit="return false">
+	<p class="summary">{sprintf($lang->total_category_result, $category_list_count)}</p>
+	<fieldset class="tSum">
+		<div class="tHeader">
+			<span class="aLeft"> <label class="tagSort">{$lang->faq_category} </label></span>
+			<span class="aRight"><label>{$lang->question_number}</label></span>
+		</div>
+		
+		<ul cond="!$faq_category_list" id="tag_list">
+			<li class="noTag"><span>{$lang->none_categoriess}</span></li>
+		</ul>
+		<ul cond="$faq_category_list" id="tag_list">
+			<li loop="$faq_category_list => $k,$category" class="hover"|cond="$category->title==$selected_category->title">
+				<a href="{getUrl('category_srl',$category->category_srl)}" class="tWord"|cond="!$category->depth" class="tWord replyIndent"|cond="$category->depth" style="padding-left:{($category->depth)*15}px;background-position:{($category->depth -1)*15}px .3em"|cond="$category->depth">{$category->title}</a> <span class="sum">{$category->question_count}</span>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset class="tModify">
+		<legend>{$lang->update_tag}</legend>
+		<dl class="tagName">
+			<dt>{$lang->category_name}:</dt>
+			<dd>
 				<input name="module_srl" type="hidden" value="{$module_info->module_srl}"/> 
 				<input name="category_srl" type="hidden" value="{$selected_category->category_srl}" /> 
-					<!--@if(!$selected_category)-->
-					<span class="cgBtn"><button type="button" onclick="createCategory(this)">{$lang->cmd_create}</button></span>
-					<!--@else-->
-					<span class="cgBtn"><button type="button" onclick="updateCategory(this)">{$lang->cmd_modify}</button></span>
-					<span class="cgBtn"><button type="button" onclick="deleteCategory(this)">{$lang->cmd_delete}</button></span>
-					<span class="cgBtn"><button type="button" onclick="jQuery('#subCat').show();">{$lang->cmd_sub_category}</button></span>
-					<!--@end-->
-				</dd>
-			</dl>
-			<dl cond="$with_used_tag_list" class="tagFamily">
-				<dt>{$lang->tag_with_tags}</dt>
-				<!--@foreach($with_used_tag_list as $k => $v)-->
-					<!--@if($v->tag != $selected_tag)-->
-						<dd><a href="{getUrl('selected_tag', $v->tag)}">{$v->tag}</a> ({$v->count})</dd>
-					<!--@end-->
-				<!--@end-->
-			</dl>
-		</fieldset>
-
-		<fieldset class="tModify" id='subCat'>
-			<legend>{$lang->update_tag}</legend>
-			<dl class="tagName">
-				<dt>{$lang->sub_category_name} :</dt>
-				<dd>
-				<input name="sub_category_title" type="text" class="inputText" value="" /> 
-				<input name="module_srl" type="hidden" value="{$module_info->module_srl}"/> 
-				<input name="parent_srl" type="hidden" value="{$selected_category->category_srl}" /> 
-				{@ $depth = $selected_category->depth+1;}
-				<input name="depth" type="hidden" value="{$depth}" /> 
-					<span class="cgBtn"><button type="button" onclick="createSubCategory(this)">{$lang->add}</button></span>
-				</dd>
-			</dl>
-			<dl cond="$with_used_tag_list" class="tagFamily">
-				<dt>{$lang->tag_with_tags}</dt>
-				<!--@foreach($with_used_tag_list as $k => $v)-->
-					<!--@if($v->tag != $selected_tag)-->
-						<dd><a href="{getUrl('selected_tag', $v->tag)}">{$v->tag}</a> ({$v->count})</dd>
-					<!--@end-->
-				<!--@end-->
-			</dl>
-		</fieldset>
-
-	</form>
-</div>
-			
+				<span class="x_input-append">
+					<input name="category_title" type="text" value="{$selected_category->title}" style="width:120px" /> 
+					<button cond="!$selected_category" class="x_btn" type="button" onclick="createCategory(this)">{$lang->cmd_create}</button>
+					<button cond="$selected_category" class="x_btn" type="button" onclick="updateCategory(this)">{$lang->cmd_modify}</button>
+					<button cond="$selected_category" class="x_btn" type="button" onclick="deleteCategory(this)">{$lang->cmd_delete}</button>
+					<button cond="$selected_category" class="x_btn" type="button" onclick="jQuery('#subCat').show();">{$lang->cmd_sub_category}</button>
+				</span>
+			</dd>
+		</dl>
+		<dl cond="$with_used_tag_list" class="tagFamily">
+			<dt>{$lang->tag_with_tags}</dt>
+			<dd loop="$with_used_tag_list => $k,$v" cond="$v->tag != $selected_tag"><a href="{getUrl('selected_tag', $v->tag)}">{$v->tag}</a> ({$v->count})</dd>
+		</dl>
+	</fieldset>
+	<fieldset class="tModify" id='subCat'>
+		<legend>{$lang->update_tag}</legend>
+		<dl class="tagName">
+			<dt>{$lang->sub_category_name}:</dt>
+			<dd>
+			<input name="module_srl" type="hidden" value="{$module_info->module_srl}"/> 
+			<input name="parent_srl" type="hidden" value="{$selected_category->category_srl}" /> 
+			{@ $depth = $selected_category->depth+1;}
+			<input name="depth" type="hidden" value="{$depth}" /> 
+			<span class="x_input-append">
+				<input name="sub_category_title" type="text" value="" style="width:120px" /> 
+				<button type="button" class="x_btn" onclick="createSubCategory(this)">{$lang->add}</button>
+			</span>
+			</dd>
+		</dl>
+		<dl cond="$with_used_tag_list" class="tagFamily">
+			<dt>{$lang->tag_with_tags}</dt>
+			<dd loop="$with_used_tag_list => $k,$v" cond="$v->tag != $selected_tag"><a href="{getUrl('selected_tag', $v->tag)}">{$v->tag}</a> ({$v->count})</dd>
+		</dl>
+	</fieldset>
+</form>
+<style>
+.categoryList{zoom:1}
+.categoryList:after{content:"";display:block;clear:both}
+.categoryList .summary{color:#555555;font-size:12px;margin:0 0 10px}
+.categoryList .summary strong{color:#EA3F22}
+.categoryList .tSum{border-top:2px solid #CBD4DF !important;margin-bottom:50px;width:48%;zoom:1;padding:0;float:left}
+.categoryList .tSum .tHeader label{background:none;border:0 none;color:#555555;cursor:default;font-size:12px;font-weight:bold;padding:0}
+.categoryList .tSum .tHeader{border-left:1px solid #E3E5E7;border-right:1px solid #E3E5E7;padding:8px 15px;overflow:hidden;zoom:1}
+.categoryList .tSum .tHeader .aLeft{float:left }
+.categoryList .tSum .tHeader .aRight{float:right}
+.categoryList .tSum ul{border:1px solid #E3E5E7;font-size:12px;height:360px;list-style:none outside none;margin:0;overflow:auto;padding:0;position:relative}
+.categoryList .tSum li{border-bottom:1px solid #E3E5E7;border-top:1px solid #E3E5E7;margin:-1px 0;padding:8px 40px 8px 15px;position:relative}
+.categoryList .tSum li .tWord{color:#648AB9;font-weight:bold;text-decoration:none}
+.categoryList .tSum li .sum{color:#EA3F22;font-size:12px;font-weight:normal;position:absolute;right:20px;top:8px;white-space:nowrap}
+.categoryList .tModify{background:#F9F9F9;border:1px solid #EDEFF1;float:right;font-size:12px;width:48%;padding-bottom:0}
+.categoryList .tModify .tagName{border-bottom:1px solid #EDEFF1;margin:0 0 -1px;padding:15px 0 15px 25px}
+.categoryList .tModify .tagName dd{display:inline;margin:0}
+.categoryList .tModify dt{color:#868D95;font-weight:bold;display:inline-block;float:left;padding-top:3px}
+.categoryList .tSum li.hover{background:#F5F5F5}
+fieldset.tModify legend{display:none}
+fieldset.tModify dl{margin-bottom:20px}
+#subCat{margin-top:5px;display:none}
+.replyIndent{background:url("{getUrl()}modules/faq/tpl/img/iconReplyArrow.gif") no-repeat}
+</style>
