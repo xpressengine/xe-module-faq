@@ -1,23 +1,6 @@
 <include target="header.html" />
 {$setup_content}
-<script>
-	/*jQuery(function($){
-		th = $('.x_table thead th');
-		th_article = th[1];
-		th_comment = th[2];
-		$(th_comment).text('');
-		if(th.length==0){
-			th = $('.x_table thead th');
-			th_comment = th[2];
-			$(th_comment).text('');
-		}
-		$("[name='comment_editor_skin']").hide();
-		$("[name='sel_comment_editor_colorset']").hide();
-		$("[name='comment_content_style']").hide();
-		$("[name='comment_editor_height']").parent('td').hide();
-		$("#enable_comment_html_3").parent('td').hide();
-		$("#comment_fileupload_3").parent('td').hide();
-		$("#comment_default_component_3").parent('td').hide();
-		$("#comment_component_3").parent('td').hide();
-	});*/
-</script>
+<style>
+.x_table>thead,
+.x_table>tbody>tr>th+td+td{display:none}
+</style>
