@@ -43,7 +43,7 @@ class faqMobile extends faqView {
 			 }else{
 				$this->dispFaqContentView();
 				
-				if($category_srl == 'all')
+				if(!is_numeric($category_srl))
 					$this->list_count = '5';
 				else
 					$this->search_list_count = '5';
