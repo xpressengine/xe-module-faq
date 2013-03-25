@@ -69,7 +69,6 @@
 			var opt = $(this).find('option:selected').attr('value');
 			var url = "";
 			url ="{getUrl('')}"+'?mid='+mid+'&sort_index='+opt+'&category='+category;
-			if(opt=='positive') url += '&order_type=desc';
 			location.href=url;
 		})
 	});

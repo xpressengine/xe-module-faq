@@ -68,13 +68,13 @@
 
 			//2013.03.25 not need columns
 			if($oDB->isColumnExists("faq_questions","positive")) {
-                $oDB->dropTable("faq_questions","positive");
+                $oDB->dropColumn("faq_questions","positive");
             }
 			if($oDB->isColumnExists("faq_questions","negative")) {
-                $oDB->dropTable("faq_questions","negative");
+                $oDB->dropColumn("faq_questions","negative");
             }
 			if($oDB->isColumnExists("faq_questions","votes")) {
-                $oDB->dropTable("faq_questions","votes");
+                $oDB->dropColumn("faq_questions","votes");
             }
 
 			$this->recompileCache();
