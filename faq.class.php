@@ -38,13 +38,14 @@
 			$oDB = &DB::getInstance();
             $oModuleModel = &getModel('module');
 
-			if(!$oDB->isColumnExists("faq_categories","depth")) return true;
-			if(!$oDB->isColumnExists("faq_questions","positive")) return true;
-			if(!$oDB->isColumnExists("faq_questions","negative")) return true;
-			if(!$oDB->isColumnExists("faq_questions","votes")) return true;
-
 			// 2012. 09. 11 when add new menu in sitemap, custom menu add
 			if(!$oModuleModel->getTrigger('menu.getModuleListInSitemap', 'faq', 'model', 'triggerModuleListInSitemap', 'after')) return true;
+
+			//2013.03.25 not need columns
+			if(!$oDB->isColumnExists("faq_categories","depth")) return true;
+			if($oDB->isColumnExists("faq_questions","positive")) return true;
+			if($oDB->isColumnExists("faq_questions","negative")) return true;
+			if($oDB->isColumnExists("faq_questions","votes")) return true;
 
             return false;
         }
@@ -60,19 +61,21 @@
 			if(!$oDB->isColumnExists("faq_categories","depth")) {
                 $oDB->addColumn("faq_categories","depth", "number",11,0,true);
             }
-			if(!$oDB->isColumnExists("faq_questions","positive")) {
-                $oDB->addColumn("faq_questions","positive", "number",11,0,true);
-            }
-			if(!$oDB->isColumnExists("faq_questions","negative")) {
-                $oDB->addColumn("faq_questions","negative", "number",11,0,true);
-            }
-			if(!$oDB->isColumnExists("faq_questions","votes")) {
-                $oDB->addColumn("faq_questions","votes", "varchar","250");
-            }
 
 			// 2012. 09. 11 when add new menu in sitemap, custom menu add
 			if(!$oModuleModel->getTrigger('menu.getModuleListInSitemap', 'faq', 'model', 'triggerModuleListInSitemap', 'after'))
 				$oModuleController->insertTrigger('menu.getModuleListInSitemap', 'faq', 'model', 'triggerModuleListInSitemap', 'after');
+
+			//2013.03.25 not need columns
+			if($oDB->isColumnExists("faq_questions","positive")) {
+                $oDB->dropTable("faq_questions","positive");
+            }
+			if($oDB->isColumnExists("faq_questions","negative")) {
+                $oDB->dropTable("faq_questions","negative");
+            }
+			if($oDB->isColumnExists("faq_questions","votes")) {
+                $oDB->dropTable("faq_questions","votes");
+            }
 
 			$this->recompileCache();
 

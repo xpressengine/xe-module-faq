@@ -154,7 +154,7 @@
             // set up sorting args
             $args->sort_index = Context::get('sort_index');
             $args->order_type = Context::get('order_type');
-			$this->order_target = array('question_srl','regdate','positive');
+			$this->order_target = array('question_srl','regdate');
             if(!in_array($args->sort_index, $this->order_target)) $args->sort_index = $this->module_info->order_target?$this->module_info->order_target:'list_order';
             if(!in_array($args->order_type, array('asc','desc'))) $args->order_type = $this->module_info->order_type?$this->module_info->order_type:'asc';
 

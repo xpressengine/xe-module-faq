@@ -37,7 +37,6 @@
         <action name="procFaqDeleteQuestion" type="controller" ruleset="deleteQuestion"/>
 
 		<action name="proGetQuesList" type="controller" standalone="true" />
-		<action name="procFaqVote" type="controller" standalone="true" />
 
     </actions>
 </module>

@@ -30,7 +30,6 @@
 			// set up addtional variables
 			if($args->use_category!='Y') $args->use_category = 'N';
 			if($args->allow_keywords!='Y') $args->allow_keywords = 'N';
-			if($args->allow_vote!='Y') $args->allow_vote = 'N';
 			
 			$args->faq_keywords = trim($args->faq_keywords);
 	

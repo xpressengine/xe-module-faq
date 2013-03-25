@@ -11,7 +11,9 @@ class faqController extends faq {
 	 * @brief initialization
 	 **/
 	function init() {
-		if(!$this->grant->manager) return $this->stop("msg_not_permitted");
+		//check permission
+		if(!$this->grant->access) return $this->stop("msg_not_permitted");
+		if(!in_array(Context::get('act'),array('proGetQuesList')) && !$this->grant->manager) return $this->stop("msg_not_permitted");
 	}
 
 	/**
@@ -506,37 +508,5 @@ class faqController extends faq {
 		$this->add('total_count', $total_count);
 	}
 
-	function procFaqVote() {
-		$args->question_srl = Context::get('question_srl');
-		$args->status = Context::get('status');
-
-		$oFaqModel = &getModel('faq');
-		$question = $oFaqModel->getQuestion($args->question_srl);
-
-		$positive = $question->get('positive');
-		$negative = $question->get('negative');
-
-		$voteExist = 1;
-		$ipaddress = $_SERVER['REMOTE_ADDR'];
-		$votesArr = explode(',',$question->get('votes'));
-		if(!in_array($ipaddress,$votesArr)){ 
-			$votesArr[] = $ipaddress;
-			$voteExist = 0;
-		}else{
-			$this->add('voteExist', $voteExist);
-			return $voteExist;
-		}
-		$args->votes = implode(',',$votesArr);
-
-		if($args->status == 'positive'){
-			$args->positive = intval($positive)+1;
-			$output = executeQuery('faq.updateQuestionPositive', $args);
-			return $output;
-		}elseif($args->status == 'negative'){
-			$args->negative = intval($negative)+1;
-			$output = executeQuery('faq.updateQuestionNegative', $args);
-			return $output;
-		}
-	}
 }
 ?>

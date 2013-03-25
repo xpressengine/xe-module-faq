@@ -175,34 +175,4 @@
 		<value xml:lang="en"><![CDATA[Sub Category]]></value>
 		<value xml:lang="zh-CN"><![CDATA[子分类]]></value>
 	</item>
-	<item name="allow_vote">
-		<value xml:lang="ko"><![CDATA[추천/비추 사용여부]]></value>
-		<value xml:lang="en"><![CDATA[Enable Vote]]></value>
-		<value xml:lang="zh-CN"><![CDATA[使用投票功能]]></value>
-	</item>
-	<item name="about_allow_vote">
-		<value xml:lang="ko"><![CDATA[게시물에 추천 / 비추천 투표가 가능합니다.]]></value>
-		<value xml:lang="en"><![CDATA[Users will be able to declare 'helpful or 'helpless' for each FAQ.]]></value>
-		<value xml:lang="zh-CN"><![CDATA[用户可以对每个FAQ声明 ‘有用’ 或 ‘无用’。]]></value>
-	</item>
-	<item name="helpful">
-		<value xml:lang="ko"><![CDATA[추천]]></value>
-		<value xml:lang="en"><![CDATA[Helpful]]></value>
-		<value xml:lang="zh-CN"><![CDATA[有用]]></value>
-	</item>
-	<item name="helpless">
-		<value xml:lang="ko"><![CDATA[비추천]]></value>
-		<value xml:lang="en"><![CDATA[Helpless]]></value>
-		<value xml:lang="zh-CN"><![CDATA[无用]]></value>
-	</item>
-	<item name="vote_success">
-		<value xml:lang="ko"><![CDATA[투표해주셔서 감사합니다.]]></value>
-		<value xml:lang="en"><![CDATA[Thank you for your vote!]]></value>
-		<value xml:lang="zh-CN"><![CDATA[谢谢你的投票！]]></value>
-	</item>
-	<item name="vote_failed">
-		<value xml:lang="ko"><![CDATA[이미 투표하신 게시물입니다.]]></value>
-		<value xml:lang="en"><![CDATA[You have voted this question already, please don't vote again]]></value>
-		<value xml:lang="zh-CN"><![CDATA[你已经对这个问题投过票了，请不要继续投票]]></value>
-	</item>
 </lang>

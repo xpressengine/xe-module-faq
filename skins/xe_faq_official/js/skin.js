@@ -34,34 +34,3 @@ jQuery(function($){
 	});
 });
 
-function voteFaq(question_srl,status){
-	var params = new Array();
-	params['question_srl'] = question_srl;
-	params['status'] = status;
-
-	var completeVote = function(ret_obj, response_tags){
-			var voteExist = parseInt(ret_obj['voteExist']);
-
-			if(voteExist == 1){
-				alert(vote_failed);
-			}else{
-				if(status == 'positive'){
-					var item = '#btn_useful'+question_srl;
-					var positive = parseInt(jQuery(item).attr('data')) + 1;
-					jQuery(item).attr('data',positive);
-					var value = '<i class="up"></i>Helpful('+positive+')';
-					jQuery(item).html(value);
-				}else if(status == 'negative'){
-					var item = '#btn_useless'+question_srl;
-					var negative = parseInt(jQuery(item).attr('data')) + 1;
-					jQuery(item).attr('data',negative);
-					var value = '<i class="down"></i>Helpless('+negative+')';
-					jQuery(item).html(value);
-				}
-				alert(vote_success);
-			}
-	 };
-	var response_tags = new Array('error','message','page','mid','voteExist');
-	exec_xml('faq', 'procFaqVote', params, completeVote, response_tags);
-}
-

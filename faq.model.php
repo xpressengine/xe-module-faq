@@ -158,7 +158,7 @@
          **/
         function getQuestionList($obj, $load_extra_vars=true) {
             // set sorting infor 
-            if(!in_array($obj->sort_index, array('question_srl','list_order','update_order','regdate','positive'))) $obj->sort_index = 'question_srl';
+            if(!in_array($obj->sort_index, array('question_srl','list_order','update_order','regdate'))) $obj->sort_index = 'question_srl';
             if(!in_array($obj->order_type, array('desc','asc'))) $obj->order_type = 'asc';
 
             // set module_srl 

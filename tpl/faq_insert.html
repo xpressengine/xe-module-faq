@@ -147,15 +147,6 @@
 		</div>
 	</div>
 	<div class="x_control-group">
-		<label class="x_control-label" for="allow_vote">{$lang->allow_vote}</label>
-		<div class="x_controls">
-			<label for="allow_vote" class="x_inline">
-				<input type="checkbox" name="allow_vote" id="allow_vote" value="Y" checked="checked"|cond="$module_info->allow_vote=='Y'" />
-				{nl2br($lang->about_allow_vote)}
-			</label>
-		</div>
-	</div>
-	<div class="x_control-group">
 		<label class="x_control-label" for="faq_keywords">{$lang->faq_keywords}</label>
 		<div class="x_controls">
 			<input type="text" name="faq_keywords" id="faq_keywords" value="{$module_info->faq_keywords?$module_info->faq_keywords:''}" />

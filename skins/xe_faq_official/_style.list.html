@@ -40,12 +40,6 @@
             </div> <!-- //popover_cate -->
         </li>
         </block>
-		<li class="sort_opt" cond="$module_info->allow_vote == 'Y'" >
-			<select id="sort_option"">
-				<option value="regdate"  <!--@if($sort_index=='regdate')-->selected<!--@end-->>Sort by date</option>
-				<option value="positive" <!--@if($sort_index=='positive')-->selected<!--@end-->>Sort by vote</option>
-			</select>
-		</li>
         <li class="t_num">Total<em>{$total_count}</em></li>
     </ul>
 </div>
@@ -59,25 +53,15 @@
                     <a href="{getUrl('act','dispFaqWrite','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_modify}</span></a>
                     <a href="{getUrl('act','dispFaqDelete','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_delete}</span></a>
                 </p>
-				<div class="vote_btn" cond="$module_info->allow_vote == 'Y'">
-					<a href="#" class="vote t-up" id="btn_useful{$question->question_srl}" data="{$question->get('positive')}" onclick="voteFaq({$question->question_srl},'positive'); return false;" ><i class="up"></i>{$lang->helpful}({$question->get('positive')})</a>
-					<a href="#" class="vote t-down"  id="btn_useless{$question->question_srl}" data="{$question->get('negative')}" onclick="voteFaq({$question->question_srl},'negative'); return false;" ><i class="down"></i>{$lang->helpless}({$question->get('negative')})</a>
-				</div>
             </div>  
         </li>
     </block>
 </ul>
 
 </div>
-{@ 
-	$vote_success = $lang->vote_success;
-	$vote_failed = $lang->vote_failed;
-}
 <script>
 	var mid = '{$mid}';
 	var category = '{$category}';
-	window.vote_success = '{$vote_success}';
-	window.vote_failed = '{$vote_failed}';
 
   
 	jQuery(function($){
