@@ -4,6 +4,7 @@
 	<p>{$XE_VALIDATOR_MESSAGE}</p>
 </div>
 <form action="./" method="post" ruleset="deleteFaq" class="section">
+	<input type="hidden" name="success_return_url" value="{getUrl('module', $module)}" />
 	<input type="hidden" name="act" value="procFaqAdminDeleteFaq" />
 	<input type="hidden" name="page" value="{$page}" />
 	<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />

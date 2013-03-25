@@ -59,7 +59,7 @@
             $this->setMessage($msg_code);
  
         	if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
-				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', 'admin', 'module_srl', $output->get('module_srl'), 'act', 'dispFaqAdminFaqInfo');
+				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', Context::get('module'), 'module_srl', $output->get('module_srl'), 'act', 'dispFaqAdminFaqInfo');
 				header('location:'.$returnUrl);
 				return;
 			}
@@ -101,7 +101,7 @@
             $this->add('page',Context::get('page'));
             $this->setMessage('success_deleted');
         	if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
-				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', 'admin', 'module_srl', $output->get('module_srl'), 'act', 'dispFaqAdminContent');
+				$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', Context::get('module'), 'module_srl', $output->get('module_srl'), 'act', 'dispFaqAdminContent');
 				header('location:'.$returnUrl);
 				return;
 			}

@@ -1,5 +1,6 @@
 <include target="header.html" />
 <form method="post" class="categoryList" onsubmit="return false">
+	<input type="hidden" name="success_return_url" value="{getUrl('module', $module)}" />
 	<p class="summary">{sprintf($lang->total_category_result, $category_list_count)}</p>
 	<fieldset class="tSum">
 		<div class="tHeader">
@@ -48,7 +49,7 @@
 			<input name="depth" type="hidden" value="{$depth}" /> 
 			<span class="x_input-append">
 				<input name="sub_category_title" type="text" value="" style="width:120px" /> 
-				<button type="button" class="x_btn" onclick="createSubCategory(this)">{$lang->add}</button>
+				<button type="button" class="x_btn" onclick="createSubCategory(this)">{$lang->cmd_add}</button>
 			</span>
 			</dd>
 		</dl>
