@@ -2,7 +2,7 @@ jQuery(document).ready(function($){
 
 var btn_srch = $('.btn_srch');
 var srch = $('form.srch');
-
+var search_keyword = $('input[name=search_keyword]').val();
 /* ray part */
 
     var more_btn = $('#more_view');
@@ -20,7 +20,7 @@ var srch = $('form.srch');
         params['page'] = page;
         params['mid'] = mid;
         params['category'] = category;
-
+		params['search_keyword'] = search_keyword;
         exec_xml('faq','proGetQuesList',params, completeGetQuestionList, response_tags);
 
         page +=1;

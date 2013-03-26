@@ -492,11 +492,11 @@ class faqController extends faq {
         $obj->page = $page?$page:1;
         $obj->list_count = $list_count?$list_count:5;
 		$obj->category_srl = $category_srl?$category_srl:null;
-		if($category_srl == 'all')
-			$obj->category_srl = null;
+		if($category_srl == 'all') $obj->category_srl = null;
+		$obj->search_keyword = Context::get('search_keyword');
+		$obj->sort_index = $this->module_info->order_target?$this->module_info->order_target:'list_order';
+		$obj->order_type = $this->module_info->order_type?$this->module_info->order_type:'asc';
 
-
-		
 		$oQuestionModel = &getModel('faq');
 		$questionList = $oQuestionModel->getQuestionList($obj);
 		$total_count = $questionList->total_count;

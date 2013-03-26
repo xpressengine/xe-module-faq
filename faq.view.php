@@ -302,8 +302,13 @@
 
         }
 
-    }
-
-
-
+		/**
+		 * @brief the method for displaying the warning messages
+		 * display an error message if it has not  a special design  
+		 **/
+		function alertMessage($message) {
+			$script =  sprintf('<script type="text/javascript"> jQuery(function(){ alert("%s"); } );</script>', Context::getLang($message));
+			Context::addHtmlFooter( $script );
+		}
+	}
 ?>
