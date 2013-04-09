@@ -30,42 +30,27 @@
 		<value xml:lang="en"><![CDATA[Create a new FAQ]]></value>
 		<value xml:lang="zh-CN"><![CDATA[新建 FAQ]]></value>
 	</item>
-	<item name="order_target">
-		<value xml:lang="ko"><![CDATA[정렬]]></value>
-		<value xml:lang="en"><![CDATA[Sorting Target]]></value>
-		<value xml:lang="zh-CN"><![CDATA[排序]]></value>
-	</item>
 	<item name="question_srl">
 		<value xml:lang="ko"><![CDATA[Question No.]]></value>
 		<value xml:lang="en"><![CDATA[Question No.]]></value>
 		<value xml:lang="zh-CN"><![CDATA[Question No.]]></value>
 	</item>
-	<item name="order_asc">
-		<value xml:lang="ko"><![CDATA[오름차순]]></value>
-		<value xml:lang="en"><![CDATA[Ascending order]]></value>
-		<value xml:lang="zh-CN"><![CDATA[递增排序]]></value>
-	</item>
-	<item name="order_desc">
-		<value xml:lang="ko"><![CDATA[내림차순]]></value>
-		<value xml:lang="en"><![CDATA[Descending order]]></value>
-		<value xml:lang="zh-CN"><![CDATA[递减排序]]></value>
-	</item>
-	<item name="list_count">
+	<item name="faq_list_count">
 		<value xml:lang="ko"><![CDATA[FAQ 수]]></value>
 		<value xml:lang="en"><![CDATA[Question Count]]></value>
 		<value xml:lang="zh-CN"><![CDATA[FAQ数量]]></value>
 	</item>
-	<item name="about_list_count">
+	<item name="about_faq_list_count">
 		<value xml:lang="ko"><![CDATA[한 페이지에서 최대 표시되는 FAQ 수를 설정합니다.(기본20개)]]></value>
 		<value xml:lang="en"><![CDATA[You can set the number of limit to show question in a page (default is 20).]]></value>
 		<value xml:lang="zh-CN"><![CDATA[设置每个页面显示的FAQ数量 (默认为 20).]]></value>
 	</item>
-	<item name="search_list_count">
+	<item name="faq_search_list_count">
 		<value xml:lang="ko"><![CDATA[FAQ 검색 결과 수]]></value>
 		<value xml:lang="en"><![CDATA[Search Question Count]]></value>
 		<value xml:lang="zh-CN"><![CDATA[FAQ搜索数量]]></value>
 	</item>
-	<item name="about_search_list_count">
+	<item name="about_faq_search_list_count">
 		<value xml:lang="ko"><![CDATA[한 페이지에 대한 검색 결과 수를 설정합니다.(기본20개)-예:검색결과가100개이면 5페이지에 걸쳐서 보여집니다.]]></value>
 		<value xml:lang="en"><![CDATA[You may set the number of questions to be exposed when you use search or category function (default is 20).]]></value>
 		<value xml:lang="zh-CN"><![CDATA[设置每个页面显示的FAQ数量 ，当使用搜索和分类查询功能时 (默认为 20).]]></value>
@@ -75,7 +60,7 @@
 		<value xml:lang="en"><![CDATA[You can set the number of page link to move pages in a bottom of page (default is 10).]]></value>
 		<value xml:lang="zh-CN"><![CDATA[设置分页栏显示的页面数 (默认为 10).]]></value>
 	</item>
-	<item name="about_description">
+	<item name="about_faq_description">
 		<value xml:lang="ko"><![CDATA[FAQ페이지 설명]]></value>
 		<value xml:lang="en"><![CDATA[It is the description for this FAQ module]]></value>
 		<value xml:lang="zh-CN"><![CDATA[FAQ页面描述]]></value>
@@ -115,11 +100,6 @@
 		<value xml:lang="en"><![CDATA[Answer]]></value>
 		<value xml:lang="zh-CN"><![CDATA[答案]]></value>
 	</item>
-	<item name="category">
-		<value xml:lang="ko"><![CDATA[FAQ 분류]]></value>
-		<value xml:lang="en"><![CDATA[FAQ Category]]></value>
-		<value xml:lang="zh-CN"><![CDATA[FAQ 分类]]></value>
-	</item>
 	<item name="category_question_count">
 		<value xml:lang="ko"><![CDATA[분류 질문 수]]></value>
 		<value xml:lang="en"><![CDATA[Question Count]]></value>
@@ -140,7 +120,7 @@
 		<value xml:lang="en"><![CDATA[FAQ Category]]></value>
 		<value xml:lang="zh-CN"><![CDATA[FAQ 分类]]></value>
 	</item>
-	<item name="total_category_result">
+	<item name="total_faq_category_result">
 		<value xml:lang="ko"><![CDATA[<strong>%d</strong> FAQ 분류가 사용됨]]></value>
 		<value xml:lang="en"><![CDATA[Total <strong>%d</strong> FAQ categories are used.]]></value>
 		<value xml:lang="zh-CN"><![CDATA[总共有 <strong>%d</strong> 个FAQ 分类 被使用.]]></value>
@@ -160,7 +140,7 @@
 		<value xml:lang="en"><![CDATA[Create]]></value>
 		<value xml:lang="zh-CN"><![CDATA[新建]]></value>
 	</item>
-	<item name="none_categoriess">
+	<item name="none_faq_categoriess">
 		<value xml:lang="ko"><![CDATA[생성된 FAQ 분류가 없습니다.]]></value>
 		<value xml:lang="en"><![CDATA[There is no FAQ categories.]]></value>
 		<value xml:lang="zh-CN"><![CDATA[没有生成的 FAQ 分类.]]></value>

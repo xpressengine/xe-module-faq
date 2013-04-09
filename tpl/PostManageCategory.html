@@ -1,7 +1,7 @@
 <include target="header.html" />
 <form method="post" class="categoryList" onsubmit="return false">
 	<input type="hidden" name="success_return_url" value="{getUrl('module', $module)}" />
-	<p class="summary">{sprintf($lang->total_category_result, $category_list_count)}</p>
+	<p class="summary">{sprintf($lang->total_faq_category_result, $category_list_count)}</p>
 	<fieldset class="tSum">
 		<div class="tHeader">
 			<span class="aLeft"> <label class="tagSort">{$lang->faq_category} </label></span>
@@ -9,7 +9,7 @@
 		</div>
 		
 		<ul cond="!$faq_category_list" id="tag_list">
-			<li class="noTag"><span>{$lang->none_categoriess}</span></li>
+			<li class="noTag"><span>{$lang->none_faq_categoriess}</span></li>
 		</ul>
 		<ul cond="$faq_category_list" id="tag_list">
 			<li loop="$faq_category_list => $k,$category" class="hover"|cond="$category->title==$selected_category->title">

@@ -108,16 +108,16 @@
 		<label class="x_control-label" for="list_count">{$lang->list_count}</label>
 		<div class="x_controls">
 			<input type="number" name="list_count" id="list_count" value="{$module_info->list_count?$module_info->list_count:20}" />
-			<a href="#about_list_count" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
-			<p class="x_help-block" id="about_list_count" hidden>{$lang->about_list_count}</p>
+			<a href="#about_faq_list_count" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+			<p class="x_help-block" id="about_faq_list_count" hidden>{$lang->about_faq_list_count}</p>
 		</div>
 	</div>
 	<div class="x_control-group">
-		<label class="x_control-label" for="search_list_count">{$lang->search_list_count}</label>
+		<label class="x_control-label" for="search_list_count">{$lang->faq_search_list_count}</label>
 		<div class="x_controls">
 			<input type="number" name="search_list_count" id="search_list_count" value="{$module_info->search_list_count?$module_info->search_list_count:20}" />
 			<a href="#about_search_list_count" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
-			<p class="x_help-block" id="about_search_list_count" hidden>{$lang->about_search_list_count}</p>
+			<p class="x_help-block" id="about_search_list_count" hidden>{$lang->about_faq_search_list_count}</p>
 		</div>
 	</div>
 	<div class="x_control-group">
@@ -159,7 +159,7 @@
 		<div class="x_controls">
 			<textarea name="description" id="description" style="vertical-align:top">{htmlspecialchars($module_info->description)}</textarea>
 			<a href="#about_description" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
-			<p class="x_help-block" id="about_description" hidden>{$lang->about_description}</p>
+			<p class="x_help-block" id="about_description" hidden>{$lang->about_faq_description}</p>
 		</div>
 	</div>
 	<div class="btnArea">
