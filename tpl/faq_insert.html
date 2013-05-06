@@ -31,7 +31,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="lang_browser_title">{$lang->browser_title}</label>
 		<div class="x_controls">
-			<input type="text" name="browser_title" id="browser_title" class="lang_code" value="{htmlspecialchars($module_info->browser_title)}" />
+			<input type="text" name="browser_title" id="browser_title" class="lang_code" value="<!--@if(strpos($module_info->browser_title, '$user_lang->') === false)-->{$module_info->browser_title}<!--@else-->{htmlspecialchars($module_info->browser_title)}<!--@end-->" />
 			<a href="#about_browser_title" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
 			<p class="x_help-block" id="about_browser_title" hidden>{$lang->about_browser_title}</p>
 		</div>
@@ -157,7 +157,7 @@
 	<div class="x_control-group">
 		<label class="x_control-label" for="description">{$lang->description}</label>
 		<div class="x_controls">
-			<textarea name="description" id="description" style="vertical-align:top">{htmlspecialchars($module_info->description)}</textarea>
+			<textarea name="description" id="description" style="vertical-align:top">{$module_info->description}</textarea>
 			<a href="#about_description" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
 			<p class="x_help-block" id="about_description" hidden>{$lang->about_faq_description}</p>
 		</div>

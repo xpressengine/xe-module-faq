@@ -70,6 +70,9 @@
 				$oFaqModel = &getModel('faq');
 				$category_list = $oFaqModel->getTopCategoryList($this->module_srl);
 				Context::set('category_list', $category_list);
+
+				$oSecurity = new Security();
+				$oSecurity->encodeHTML('category_list..');
 			}
         }
 

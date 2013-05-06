@@ -11,6 +11,8 @@
             {@ $oFaqModel = &getModel('faq');
 			  $depth =  $oFaqModel->getHighestCategoryDepth($val->module_srl, $val->category_srl);
               $subCategories_1 = $oFaqModel->getSubCategoryListByDepth($val->module_srl, $val->category_srl,1);
+			  $oSecurity = new Security($subCategories_1);
+			  $oSecurity->encodeHTML('..');
             }
             <div id="popup{$val->category_srl}" class="popover_cate" cond="$subCategories_1">
                 <span class="arr"></span>
@@ -28,6 +30,8 @@
                         <dt class="cat_on"|cond="$val2->category_srl == Context::get('category') || $val2->category_srl == Context::get('secategory')" class="cg_L2"|cond="$val2->category_srl != Context::get('category') && $val2->category_srl != Context::get('secategory')"><a  href="{getUrl('','mid',$mid,'category',$val2->category_srl,'topcategory',$val->category_srl)}">{$val2->title}</a></dt>
                         <dd class="cg_L3">
 						{@$subCategories_2 = $oFaqModel->getSubCategoryListByDepth($val->module_srl, $val2->category_srl,2);
+							$oSecurity = new Security($subCategories_2);
+							$oSecurity->encodeHTML('..');
 						}
                         <ul>
                         <li loop="$subCategories_2 =>$key3, $val3" class="cat_on"|cond="$val3->category_srl == Context::get('category')" ><a href="{getUrl('','mid',$mid,'category',$val3->category_srl,'topcategory',$val->category_srl,'secategory',$val2->category_srl)}">{$val3->title}</a></li>

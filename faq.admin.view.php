@@ -47,6 +47,10 @@
             $order_target['list_order'] = Context::getLang('regdate');
             $order_target['update_order'] = Context::getLang('last_update');
             Context::set('order_target', $order_target);
+
+			$oSecurity = new Security();
+			$oSecurity->encodeHTML('module_info.');
+			$oSecurity->encodeHTML('module_category..');
         }
 
         function dispFaqAdminContent() {
@@ -73,6 +77,9 @@
             Context::set('page', $output->page);
             Context::set('faq_list', $output->data);
             Context::set('page_navigation', $output->page_navigation);
+
+			$oSecurity = new Security();
+			$oSecurity->encodeHTML('faq_list..');
 
             // set template file
             $this->setTemplateFile('index');
@@ -106,6 +113,10 @@
 			$mobile_layout_list = $oLayoutModel->getLayoutList(0,"M");
 			Context::set('mlayout_list', $mobile_layout_list);
 
+			$oSecurity = new Security();
+			$oSecurity->encodeHTML('skin_list..', 'mskin_list..');
+			$oSecurity->encodeHTML('layout_list..', 'mlayout_list..');
+
 			$this->setTemplateFile('faq_insert');
          
         }
@@ -126,6 +137,10 @@
 				$output = $oFaqModel->getCategory($category_srl);
 				Context::set('selected_category',$output);
 			}
+
+			$oSecurity = new Security();
+			$oSecurity->encodeHTML('faq_category_list..', 'selected_category.');
+
 			$this->setTemplateFile('PostManageCategory');
         }
 
