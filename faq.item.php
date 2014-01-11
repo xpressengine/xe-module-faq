@@ -43,7 +43,7 @@
             $logged_info = Context::get('logged_info');
             if($logged_info->is_admin == 'Y') return true;
 
-			$oModuleModel = &getModel('module');
+			$oModuleModel = getModel('module');
 			$grant = $oModuleModel->getGrant($oModuleModel->getModuleInfoByModuleSrl($this->get('module_srl')), $logged_info);
 			if($grant->manager) return true;
             if($this->get('member_srl') && $this->get('member_srl') == $logged_info->member_srl) return true;
@@ -81,7 +81,7 @@
 			// do not use auto_save 
 			//$GLOBALS['__editor_module_config__'][$module_srl]->enable_autosave = 'N';
 
-            $oEditorModel = &getModel('editor');
+            $oEditorModel = getModel('editor');
             return $oEditorModel->getModuleEditor('document', $module_srl, $this->question_srl, 'question_srl', 'answer');
         }
 
@@ -121,7 +121,7 @@
             $this->lang_code = $attribute->lang_code;
             $this->adds($attribute);
 
-            $oFaqModel = &getModel('faq');
+            $oFaqModel = getModel('faq');
             $GLOBALS['XE_QUESTION_LIST'][$this->question_srl] = $this;
 
         }

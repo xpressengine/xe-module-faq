@@ -17,7 +17,7 @@
             }
 
             // module model class
-            $oModuleModel = &getModel('module');
+            $oModuleModel = getModel('module');
 
             // get module_info based on module_srl
             if($module_srl) {
@@ -98,7 +98,7 @@
             }
 
 			//get skin list
-			$oModuleModel = &getModel('module');
+			$oModuleModel = getModel('module');
             $skin_list = $oModuleModel->getSkins($this->module_path);
             Context::set('skin_list',$skin_list);
 
@@ -106,7 +106,7 @@
 			Context::set('mskin_list', $mskin_list);
 
 			//get layout list
-            $oLayoutModel = &getModel('layout');
+            $oLayoutModel = getModel('layout');
             $layout_list = $oLayoutModel->getLayoutList();
             Context::set('layout_list', $layout_list);
 
@@ -129,7 +129,7 @@
 			$category_srl = Context::get('category_srl');
 			$parent_srl = 0;
 			
-			$oFaqModel = &getModel('faq');
+			$oFaqModel = getModel('faq');
 			$output = $oFaqModel->getAllCategoryList($module_srl,$parent_srl);
             Context::set('faq_category_list', $output);
             Context::set('category_list_count',count($output));
@@ -150,7 +150,7 @@
         function dispFaqAdminFaqAdditionSetup() {
 
 			$content = '';
-            /*$oModuleModel = &getModel('module');
+            /*$oModuleModel = getModel('module');
             $triggers = $oModuleModel->getTriggers('module.dispAdditionSetup', 'before');
             
             var_dump($triggers);
@@ -161,7 +161,7 @@
                 $called_method = $item->called_method;
 				if($module == 'editor'){ //only display edtior
 					$oModule = null;
-					$oModule = &getModule($module, $type);
+					$oModule = getModule($module, $type);
 					if(!$oModule || !method_exists($oModule, $called_method)) continue;
 
 					$output = $oModule->{$called_method}($content);
@@ -170,7 +170,7 @@
 				}
 
             }*/
-			$oEditorView = &getView('editor');
+			$oEditorView = getView('editor');
             $oEditorView->triggerDispEditorAdditionSetup($content);
             
             Context::set('setup_content', $content);
@@ -191,7 +191,7 @@
 
             $module_info = Context::get('module_info');
 
-            $oFaqModel = &getModel('faq');
+            $oFaqModel = getModel('faq');
             $question_count = $oFaqModel->getQuestionCount($module_info->module_srl);
             $module_info->question_count = $question_count;
 
@@ -206,7 +206,7 @@
          **/
         function dispFaqAdminGrantInfo() {
             // get the grant infotmation from admin module 
-            $oModuleAdminModel = &getAdminModel('module');
+            $oModuleAdminModel = getAdminModel('module');
             $grant_content = $oModuleAdminModel->getModuleGrantHTML($this->module_info->module_srl, $this->xml_info->grant);
             Context::set('grant_content', $grant_content);
 

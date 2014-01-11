@@ -34,10 +34,10 @@ class faqController extends faq {
 		if($obj->question == '') $obj->question = 'Question Undefined';
 
 		// get faq module model
-		$oFaqtModel = &getModel('faq');
+		$oFaqtModel = getModel('faq');
 
 		// get faq module controller
-		$oFaqController = &getController('faq');
+		$oFaqController = getController('faq');
 
 		// get question object
 		$oQuestion = $oFaqtModel->getQuestion($obj->question_srl);;
@@ -82,7 +82,7 @@ class faqController extends faq {
 		if(!$question_srl) return $this->doError('msg_invalid_document');
 		            
 		// get faq module model
-		$oFaqController = &getController('faq');
+		$oFaqController = getController('faq');
 
 		// delete question
 		$output = $oFaqController->deleteQuestion($question_srl);
@@ -125,7 +125,7 @@ class faqController extends faq {
 		// create a question_srl
 		if(!$obj->question_srl) $obj->question_srl = getNextSequence();
 
-		$oFaqModel = &getModel('faq');
+		$oFaqModel = getModel('faq');
 
 		// get category list
 		if($obj->question_srl) {
@@ -196,7 +196,7 @@ class faqController extends faq {
 		$oDB = &DB::getInstance();
 		$oDB->begin();
 
-		$oModuleModel = &getModel('module');
+		$oModuleModel = getModel('module');
 		if(!$obj->module_srl) $obj->module_srl = $source_obj->get('module_srl');
 		$module_srl = $obj->module_srl;
 
@@ -206,7 +206,7 @@ class faqController extends faq {
 		unset($obj->_saved_doc_answer);
 		unset($obj->_saved_doc_message);
 
-		$oFaqModel = &getModel('faq');
+		$oFaqModel = getModel('faq');
 
 		// get updated category
 		if($source_obj->get('category_srl')!=$obj->category_srl) {
@@ -257,7 +257,7 @@ class faqController extends faq {
 		$oDB->commit();
 
 		// remove thumbnail
-		FileHandler::removeDir(sprintf('files/cache/thumbnails/%s',getNumberingPath($obj->question_srl, 3)));
+		FileHandler::removeDir(sprintf('files/thumbnails/%s',getNumberingPath($obj->question_srl, 3)));
 
 		$output->add('question_srl',$obj->question_srl);
 		return $output;
@@ -274,7 +274,7 @@ class faqController extends faq {
 		$oDB->begin();
 
 		// get faq model
-		$oFaqModel = &getModel('faq');
+		$oFaqModel = getModel('faq');
 
 		// get question object
 		$oQuestion = $oFaqModel->getQuestion($question_srl, $is_admin);
@@ -292,7 +292,7 @@ class faqController extends faq {
 
 
 		// remove thumbnail
-		FileHandler::removeDir(sprintf('files/cache/thumbnails/%s',getNumberingPath($question_srl, 3)));
+		FileHandler::removeDir(sprintf('files/thumbnails/%s',getNumberingPath($question_srl, 3)));
 
 		// commit
 		$oDB->commit();
@@ -306,7 +306,7 @@ class faqController extends faq {
 	 **/
 	function updateCategoryCount($module_srl, $category_srl, $question_count = 0) {
 		// get faq model
-		$oFaqModel = &getModel('faq');
+		$oFaqModel = getModel('faq');
 		if(!$question_count) $question_count = $oFaqModel->getCategoryQuestionCount($module_srl,$category_srl);
 		$args->category_srl = $category_srl;
 		$args->question_count = $question_count;
@@ -322,7 +322,7 @@ class faqController extends faq {
 		// set category list order
 		if($obj->parent_srl) {
 			// when insert a subcategory
-			$oFaqModel = &getModel('faq');
+			$oFaqModel = getModel('faq');
 			$parent_category = $oFaqModel->getCategory($obj->parent_srl);
 			$obj->list_order = $parent_category->list_order;
 			$this->updateCategoryListOrder($parent_category->module_srl, $parent_category->list_order+1);
@@ -361,7 +361,7 @@ class faqController extends faq {
 	 **/
 	function deleteCategory($category_srl) {
 		$args->category_srl = $category_srl;
-		$oFaqModel = &getModel('faq');
+		$oFaqModel = getModel('faq');
 		$category_info = $oFaqModel->getCategory($category_srl);
 
 		// if the category has any child, then return an error
@@ -396,7 +396,7 @@ class faqController extends faq {
 		}
 
 		// get module information, check permission
-		$oModuleModel = &getModel('module');
+		$oModuleModel = getModel('module');
 		$module_info = $oModuleModel->getModuleInfoByModuleSrl($args->module_srl);
 		$grant = $oModuleModel->getGrant($module_info, Context::get('logged_info'));
 		if(!$grant->manager) return new Object(-1,'msg_not_permitted');
@@ -406,7 +406,7 @@ class faqController extends faq {
 		$args->parent_srl = intval($args->parent_srl);
 		$args->depth = intval($args->depth);
 
-		$oFaqModel = &getModel('faq');
+		$oFaqModel = getModel('faq');
 
 		$oDB = &DB::getInstance();
 		$oDB->begin();
@@ -455,12 +455,12 @@ class faqController extends faq {
 		$oDB->begin();
 
 		// check permission
-		$oModuleModel = &getModel('module');
+		$oModuleModel = getModel('module');
 		$module_info = $oModuleModel->getModuleInfoByModuleSrl($args->module_srl);
 		$grant = $oModuleModel->getGrant($module_info, Context::get('logged_info'));
 		if(!$grant->manager) return new Object(-1,'msg_not_permitted');
 
-		$oFaqModel = &getModel('faq');
+		$oFaqModel = getModel('faq');
 
 		// get category information
 		$category_info = $oFaqModel->getCategory($args->category_srl);
@@ -497,7 +497,7 @@ class faqController extends faq {
 		$obj->sort_index = $this->module_info->order_target?$this->module_info->order_target:'list_order';
 		$obj->order_type = $this->module_info->order_type?$this->module_info->order_type:'asc';
 
-		$oQuestionModel = &getModel('faq');
+		$oQuestionModel = getModel('faq');
 		$questionList = $oQuestionModel->getQuestionList($obj);
 		$total_count = $questionList->total_count;
 

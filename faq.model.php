@@ -17,8 +17,8 @@
          * @brief getListConfig
          **/
         function getListConfig($module_srl) {
-            $oModuleModel = &getModel('module');
-            $oFaqModel = &getModel('faq');
+            $oModuleModel = getModel('module');
+            $oFaqModel = getModel('faq');
 
             $list_config = $oModuleModel->getModulePartConfig('faq', $module_srl);
             if(!$list_config || !count($list_config)) $list_config = array( 'no', 'title', 'nick_name','regdate','readed_count');
@@ -163,7 +163,7 @@
 
             // set module_srl 
             if($obj->mid) {
-                $oModuleModel = &getModel('module');
+                $oModuleModel = getModel('module');
                 $obj->module_srl = $oModuleModel->getModuleSrlByMid($obj->mid);
                 unset($obj->mid);
             }

@@ -18,8 +18,8 @@
          **/
         function procFaqAdminInsertFaq($args = null) {
             // get module model/module controller
-            $oModuleController = &getController('module');
-            $oModuleModel = &getModel('module');
+            $oModuleController = getController('module');
+            $oModuleModel = getModel('module');
 
             // get variables from admin page form
             if(!$args) $args = Context::getRequestVars();
@@ -71,12 +71,12 @@
             $module_srl = Context::get('module_srl');
 
 			$obj->module_srl = $module_srl;
-			$oFaqModel = &getModel('faq');
+			$oFaqModel = getModel('faq');
 			$oQuestionList = $oFaqModel->getQuestionList($obj);
 			$oCategoryList = $oFaqModel->getAllCategoryList($obj->module_srl,0);
 
 			// delete module's question
-			$oFaqController = &getController('faq');
+			$oFaqController = getController('faq');
 			if(count($oQuestionList->data)>0){
 				foreach($oQuestionList->data as $oQuestion){
 					$oFaqController->deleteQuestion($oQuestion->question_srl);
@@ -92,7 +92,7 @@
 				}
 			}
 
-            $oModuleController = &getController('module');
+            $oModuleController = getController('module');
             $output = $oModuleController->deleteModule($module_srl);
             if(!$output->toBool()) return $output;
 

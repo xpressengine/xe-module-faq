@@ -24,8 +24,8 @@
 		function moduleInstall()
 		{
             // action forward get module controller and model
-            $oModuleController = &getController('module');
-            $oModuleModel = &getModel('module');
+            $oModuleController = getController('module');
+            $oModuleModel = getModel('module');
 			$oModuleController->insertTrigger('menu.getModuleListInSitemap', 'faq', 'model', 'triggerModuleListInSitemap', 'after');
 
             return new Object();
@@ -36,7 +36,7 @@
          **/
         function checkUpdate() {
 			$oDB = &DB::getInstance();
-            $oModuleModel = &getModel('module');
+            $oModuleModel = getModel('module');
 
 			// 2012. 09. 11 when add new menu in sitemap, custom menu add
 			if(!$oModuleModel->getTrigger('menu.getModuleListInSitemap', 'faq', 'model', 'triggerModuleListInSitemap', 'after')) return true;
@@ -55,8 +55,8 @@
          **/
         function moduleUpdate() {
 			$oDB = &DB::getInstance();
-            $oModuleModel = &getModel('module');
-            $oModuleController = &getController('module');
+            $oModuleModel = getModel('module');
+            $oModuleController = getController('module');
 
 			if(!$oDB->isColumnExists("faq_categories","depth")) {
                 $oDB->addColumn("faq_categories","depth", "number",11,0,true);

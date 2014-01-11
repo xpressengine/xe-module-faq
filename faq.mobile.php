@@ -23,7 +23,7 @@ class faqMobile extends faqView {
 	         /**
              * get extra variables from xe_module_extra_vars table, context set
              **/
-            $oModuleModel = &getModel('module');
+            $oModuleModel = getModel('module');
             $extra_keys = $oModuleModel->getModuleExtraVars($this->module_info->module_srl);
             Context::set('extra_keys', $extra_keys);
 

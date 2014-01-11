@@ -30,7 +30,7 @@
             /**
              * get extra variables from xe_module_extra_vars table, context set
              **/
-            $oModuleModel = &getModel('module');
+            $oModuleModel = getModel('module');
             $extra_keys = $oModuleModel->getModuleExtraVars($this->module_info->module_srl);
             Context::set('extra_keys', $extra_keys);
 
@@ -67,7 +67,7 @@
          **/
         function dispFaqCategoryList(){
 			if($this->module_info->use_category=='Y') {
-				$oFaqModel = &getModel('faq');
+				$oFaqModel = getModel('faq');
 				$category_list = $oFaqModel->getTopCategoryList($this->module_srl);
 				Context::set('category_list', $category_list);
 
@@ -88,7 +88,7 @@
 			$page = Context::get('page');
 
             // faq model class
-            $oFaqModel = &getModel('faq');
+            $oFaqModel = getModel('faq');
 
             /**
              * get question from faq model
@@ -139,7 +139,7 @@
 			}*/
 			if(!Context::get('page')) Context::set('page', 1);
 
-            $oFaqModel = &getModel('faq');
+            $oFaqModel = getModel('faq');
 
             // set up basic args
             $args->module_srl = $this->module_srl; 
@@ -198,7 +198,7 @@
             Context::set('page_navigation', $output->page_navigation);
 
             // get list config
-            $oFaqModel = &getModel('faq');
+            $oFaqModel = getModel('faq');
             Context::set('list_config', $oFaqModel->getListConfig($this->module_info->module_srl));
         }
 
@@ -213,7 +213,7 @@
             $logged_info = Context::get('logged_info');
             if(!$this->grant->manager) return $this->setTemplateFile('input_password_form');
 
-			$oFaqModel = &getModel('faq');
+			$oFaqModel = getModel('faq');
 
 			if(Context::get('is_logged')) {
 				$logged_info = Context::get('logged_info');
@@ -255,7 +255,7 @@
             // if faq is not editable, go to login page
             if($oQuestion->isExists()&&!$oQuestion->isEditable()) return $this->setTemplateFile('input_password_form');
             if(!$oQuestion->isExists()) {
-                $oModuleModel = &getModel('module');		
+                $oModuleModel = getModel('module');		
                 $logged_info = Context::get('logged_info');
             }
 
@@ -286,7 +286,7 @@
 
             // get question object
             if($question_srl) {
-                $oFaqModel = &getModel('faq');
+                $oFaqModel = getModel('faq');
                 $oQuestion = $oFaqModel->getQuestion($question_srl);
             }
 
