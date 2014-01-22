@@ -8,18 +8,18 @@
 
 <include target="_header.html" />
 <header class="mod_head">
-    <h2 class="mod_title">FAQ</h2>
-    <a href="{getUrl('','mid',$mid)}" class="btn_back" >Back</a>
-    <button class="btn_srch">search</button>
-    <form action="./" method="get" id="fo_search" class="srch">
-        <fieldset>
-        <legend>Search</legend>
-            <input cond="$vid" type="hidden" name="vid" value="{$vid}" />
-            <input type="hidden" name="mid" value="{$mid}" />
-            <input type="hidden" name="category" value="{htmlspecialchars($category)}" />
-            <span><input id="searchkey" name="search_keyword" value="{$search_keyword}" type="search" placeholder="Search..." title="{$lang->cmd_search}" /></span>
-        </fieldset>
-    </form>
+	<h2 class="mod_title">FAQ</h2>
+	<a href="{getUrl('','mid',$mid)}" class="btn_back" >Back</a>
+	<button class="btn_srch">search</button>
+	<form action="./" method="get" id="fo_search" class="srch">
+		<fieldset>
+		<legend>Search</legend>
+			<input cond="$vid" type="hidden" name="vid" value="{$vid}" />
+			<input type="hidden" name="mid" value="{$mid}" />
+			<input type="hidden" name="category" value="{htmlspecialchars($category)}" />
+			<span><input id="searchkey" name="search_keyword" value="{$search_keyword}" type="search" placeholder="Search..." title="{$lang->cmd_search}" /></span>
+		</fieldset>
+	</form>
 </header>
 
 <dl class="p_list" id="p_list">
@@ -29,8 +29,8 @@
 </block>
 </dl>
 <div class="list_btm">
-    <a href="#" onclick="return false;"class="more" id="more_view">More<i class="icon_arrow_dn"></i></a>
-    <a href="#ct" class="top">Top</a>
+	<a href="#" onclick="return false;"class="more" id="more_view">More<i class="icon_arrow_dn"></i></a>
+	<a href="#ct" class="top">Top</a>
 </div>
 
 <script>

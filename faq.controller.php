@@ -1,16 +1,18 @@
 <?php
+/* Copyright (C) NAVER <http://www.navercorp.com> */
+
 /**
  * @class  faqController
- * @author NHN (developers@xpressengine.com)
+ * @author NAVER (developers@xpressengine.com)
  * @brief  faq module Controller class
  **/
-
-class faqController extends faq {
-
+class faqController extends faq
+{
 	/**
 	 * @brief initialization
 	 **/
-	function init() {
+	function init()
+	{
 		//check permission
 		if(!$this->grant->access) return $this->stop("msg_not_permitted");
 		if(!in_array(Context::get('act'),array('proGetQuesList')) && !$this->grant->manager) return $this->stop("msg_not_permitted");
@@ -19,11 +21,14 @@ class faqController extends faq {
 	/**
 	 * @brief insert/update question (faq_item)
 	 **/
-	function procFaqInsertQuestion() {
-
+	function procFaqInsertQuestion()
+	{
 		// check permission
-		if($this->module_info->module != "faq") return new Object(-1, "msg_invalid_request");
-        $logged_info = Context::get('logged_info');
+		if($this->module_info->module != "faq")
+		{
+			return new Object(-1, "msg_invalid_request");
+		}
+		$logged_info = Context::get('logged_info');
 
 		// get form variables submitted
 		$obj = Context::getRequestVars();
@@ -42,13 +47,15 @@ class faqController extends faq {
 		// get question object
 		$oQuestion = $oFaqtModel->getQuestion($obj->question_srl);;
 
-	   // if question exists, then update question
-		if($oQuestion->isExists() && $oQuestion->question_srl == $obj->question_srl) {
+		// if question exists, then update question
+		if($oQuestion->isExists() && $oQuestion->question_srl == $obj->question_srl)
+		{
 			$output = $oFaqController->updateQuestion($oQuestion, $obj);
 			$msg_code = 'success_updated';
-
-		// if question not exists, then insert question
-		} else {
+		}
+		else
+		{
+			// if question not exists, then insert question
 			$output = $oFaqController->insertQuestion($obj);
 			$msg_code = 'success_registed';
 			$obj->question_srl = $output->get('question_srl');
@@ -64,7 +71,8 @@ class faqController extends faq {
 		// output success inserted/updated message
 		$this->setMessage($msg_code);
 
-	    if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
+		if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON')))
+		{
 			$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'mid', $this->module_info->mid, 'act', 'dispFaqContent');
 			header('location:'.$returnUrl);
 			return;
@@ -74,13 +82,14 @@ class faqController extends faq {
 	/**
 	 * @brief delete question
 	 **/
-	function procFaqDeleteQuestion() {
+	function procFaqDeleteQuestion()
+	{
 		// get question_srl
 		$question_srl = Context::get('question_srl');
 
 		// if question not exists, then alert an error
 		if(!$question_srl) return $this->doError('msg_invalid_document');
-		            
+
 		// get faq module model
 		$oFaqController = getController('faq');
 
@@ -93,24 +102,24 @@ class faqController extends faq {
 		$this->add('page', $output->get('page'));
 		$this->setMessage('success_deleted');
 
-		if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON'))) {
+		if(!in_array(Context::getRequestMethod(),array('XMLRPC','JSON')))
+		{
 			$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'mid', $this->module_info->mid, 'act', 'dispFaqContent');
 			header('location:'.$returnUrl);
 			return;
 		}
-
 	}
 
 	/**
 	 * @brief insert question
 	 **/
-	function insertQuestion($obj, $manual_inserted = false) {
-
+	function insertQuestion($obj, $manual_inserted = false)
+	{
 		// begin transaction
 		$oDB = &DB::getInstance();
 		$oDB->begin();
 
-		$obj->ipaddress = $_SERVER['REMOTE_ADDR'];	//get client ip, or remote proxy server ip address 
+		$obj->ipaddress = $_SERVER['REMOTE_ADDR'];	//get client ip, or remote proxy server ip address
 
 		// $extra_vars serialize
 		$obj->extra_vars = serialize($obj->extra_vars);
@@ -121,16 +130,19 @@ class faqController extends faq {
 		unset($obj->_saved_doc_answer);
 		unset($obj->_saved_doc_message);
 
-
 		// create a question_srl
 		if(!$obj->question_srl) $obj->question_srl = getNextSequence();
 
 		$oFaqModel = getModel('faq');
 
 		// get category list
-		if($obj->question_srl) {
+		if($obj->question_srl)
+		{
 			$oCategory = $oFaqModel->getCategory($obj->category_srl);
-			if(!$oCategory || ($oCategory->module_srl != $obj->module_srl)) $obj->category_srl = 0;
+			if(!$oCategory || ($oCategory->module_srl != $obj->module_srl))
+			{
+				$obj->category_srl = 0;
+			}
 		}
 
 		// set read_count, update_order&list_order
@@ -138,10 +150,14 @@ class faqController extends faq {
 		$obj->update_order = $obj->list_order = getNextSequence() * -1;
 
 		// md5 user password
-		if($obj->password && !$obj->password_is_hashed) $obj->password = md5($obj->password);
+		if($obj->password && !$obj->password_is_hashed)
+		{
+			$obj->password = md5($obj->password);
+		}
 
 		// set up log user inforamtion
-		if(Context::get('is_logged')&&!$manual_inserted) {
+		if(Context::get('is_logged') && !$manual_inserted)
+		{
 			$logged_info = Context::get('logged_info');
 			$obj->member_srl = $logged_info->member_srl;
 			$obj->user_id = $logged_info->user_id;
@@ -166,7 +182,8 @@ class faqController extends faq {
 
 		// DB quesry
 		$output = executeQuery('faq.insertQuestion', $obj);
-		if(!$output->toBool()) {
+		if(!$output->toBool())
+		{
 			$oDB->rollback();
 			return $output;
 		}
@@ -174,23 +191,25 @@ class faqController extends faq {
 		// update category count
 		if($obj->category_srl) $this->updateCategoryCount($obj->module_srl, $obj->category_srl);
 
-
 		// DB commit
 		$oDB->commit();
 
 		$output->add('question_srl',$obj->document_srl);
 		$output->add('category_srl',$obj->category_srl);
-		return $output;
 
+		return $output;
 	}
 
 
 	/**
 	 * @brief update question
 	 **/
-	function updateQuestion($source_obj, $obj) {
-
-		if(!$source_obj->question_srl || !$obj->question_srl) return new Object(-1,'msg_invalied_request');
+	function updateQuestion($source_obj, $obj)
+	{
+		if(!$source_obj->question_srl || !$obj->question_srl)
+		{
+			return new Object(-1,'msg_invalied_request');
+		}
 
 		// begin transaction
 		$oDB = &DB::getInstance();
@@ -209,7 +228,8 @@ class faqController extends faq {
 		$oFaqModel = getModel('faq');
 
 		// get updated category
-		if($source_obj->get('category_srl')!=$obj->category_srl) {
+		if($source_obj->get('category_srl')!=$obj->category_srl)
+		{
 			$oCategory = $oFaqModel->getCategory($obj->category_srl);
 			if(!$oCategory || ($oCategory->module_srl != $obj->module_srl)) $obj->category_srl = 0;
 		}
@@ -218,15 +238,18 @@ class faqController extends faq {
 		$obj->update_order = getNextSequence() * -1;
 
 		// set up log user information
-		if(Context::get('is_logged')) {
+		if(Context::get('is_logged'))
+		{
 			$logged_info = Context::get('logged_info');
-			if($source_obj->get('member_srl')==$logged_info->member_srl) {
+			if($source_obj->get('member_srl')==$logged_info->member_srl)
+			{
 				$obj->member_srl = $logged_info->member_srl;
 			}
 		}
 
 		// then only question provider can update question
-		if($source_obj->get('member_srl')&& !$obj->nick_name) {
+		if($source_obj->get('member_srl')&& !$obj->nick_name)
+		{
 			$obj->member_srl = $source_obj->get('member_srl');
 		}
 
@@ -238,20 +261,24 @@ class faqController extends faq {
 
 		if($logged_info->is_admin != 'Y') $obj->answer = removeHackTag($obj->answer);
 
-
 		// DB update question
 		$output = executeQuery('faq.updateQuestion', $obj);
-		if(!$output->toBool()) {
+		if(!$output->toBool())
+		{
 			$oDB->rollback();
 			return $output;
 		}
 
-		// update category count when the question's category changed 
-		if($source_obj->get('category_srl') != $obj->category_srl || $source_obj->get('module_srl') == $logged_info->member_srl) {
-			if($source_obj->get('category_srl') != $obj->category_srl) $this->updateCategoryCount($obj->module_srl, $source_obj->get('category_srl'));
+		// update category count when the question's category changed
+		if($source_obj->get('category_srl') != $obj->category_srl || $source_obj->get('module_srl') == $logged_info->member_srl)
+		{
+			if($source_obj->get('category_srl') != $obj->category_srl)
+			{
+				$this->updateCategoryCount($obj->module_srl, $source_obj->get('category_srl'));
+			}
+
 			if($obj->category_srl) $this->updateCategoryCount($obj->module_srl, $obj->category_srl);
 		}
-
 
 		// DB commit
 		$oDB->commit();
@@ -261,14 +288,13 @@ class faqController extends faq {
 
 		$output->add('question_srl',$obj->question_srl);
 		return $output;
-
 	}
 
 	/**
 	 * @brief delete question
 	 **/
-	function deleteQuestion($question_srl, $is_admin = false) {
-
+	function deleteQuestion($question_srl, $is_admin = FALSE)
+	{
 		// begin transaction
 		$oDB = &DB::getInstance();
 		$oDB->begin();
@@ -282,14 +308,14 @@ class faqController extends faq {
 
 		$args->question_srl = $question_srl;
 		$output = executeQuery('faq.deleteQuestion', $args);
-		if(!$output->toBool()) {
+		if(!$output->toBool())
+		{
 			$oDB->rollback();
 			return $output;
 		}
 
 		// update category count when the question has beeen deleted
 		if($oQuestion->get('category_srl')) $this->updateCategoryCount($oQuestion->get('module_srl'),$oQuestion->get('category_srl'));
-
 
 		// remove thumbnail
 		FileHandler::removeDir(sprintf('files/thumbnails/%s',getNumberingPath($question_srl, 3)));
@@ -304,10 +330,14 @@ class faqController extends faq {
 	/**
 	 * @brief update category count
 	 **/
-	function updateCategoryCount($module_srl, $category_srl, $question_count = 0) {
+	function updateCategoryCount($module_srl, $category_srl, $question_count = 0)
+	{
 		// get faq model
 		$oFaqModel = getModel('faq');
-		if(!$question_count) $question_count = $oFaqModel->getCategoryQuestionCount($module_srl,$category_srl);
+		if(!$question_count)
+		{
+			$question_count = $oFaqModel->getCategoryQuestionCount($module_srl,$category_srl);
+		}
 		$args->category_srl = $category_srl;
 		$args->question_count = $question_count;
 		$output = executeQuery('faq.updateCategoryCount', $args);
@@ -318,21 +348,26 @@ class faqController extends faq {
 	/**
 	 * @brief insert faq category
 	 **/
-	function insertCategory($obj) {
+	function insertCategory($obj)
+	{
 		// set category list order
-		if($obj->parent_srl) {
+		if($obj->parent_srl)
+		{
 			// when insert a subcategory
 			$oFaqModel = getModel('faq');
 			$parent_category = $oFaqModel->getCategory($obj->parent_srl);
 			$obj->list_order = $parent_category->list_order;
 			$this->updateCategoryListOrder($parent_category->module_srl, $parent_category->list_order+1);
 			if(!$obj->category_srl) $obj->category_srl = getNextSequence();
-		} else {
+		}
+		else
+		{
 			$obj->list_order = $obj->category_srl = getNextSequence();
 		}
 
 		$output = executeQuery('faq.insertCategory', $obj);
-		if($output->toBool()) {
+		if($output->toBool())
+		{
 			$output->add('category_srl', $obj->category_srl);
 		}
 
@@ -342,7 +377,9 @@ class faqController extends faq {
 	/**
 	 * @brief update category list order
 	 **/
-	function updateCategoryListOrder($module_srl, $list_order) {
+	function updateCategoryListOrder($module_srl, $list_order)
+	{
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->list_order = $list_order;
 		return executeQuery('faq.updateCategoryOrder', $args);
@@ -351,7 +388,8 @@ class faqController extends faq {
 	/**
 	 * @brief update category
 	 **/
-	function updateCategory($obj) {
+	function updateCategory($obj)
+	{
 		$output = executeQuery('faq.updateCategory', $obj);
 		return $output;
 	}
@@ -359,7 +397,9 @@ class faqController extends faq {
 	/**
 	 * @brief delete category
 	 **/
-	function deleteCategory($category_srl) {
+	function deleteCategory($category_srl)
+	{
+		$args = new stdClass;
 		$args->category_srl = $category_srl;
 		$oFaqModel = getModel('faq');
 		$category_info = $oFaqModel->getCategory($category_srl);
@@ -373,7 +413,6 @@ class faqController extends faq {
 		$output = executeQuery('faq.deleteCategory', $args);
 		if(!$output->toBool()) return $output;
 
-
 		unset($args);
 
 		$args->target_category_srl = 0;
@@ -386,7 +425,8 @@ class faqController extends faq {
 	/**
 	 * @brief proc insert/update category
 	 **/
-	function procFaqInsertCategory($args = null) {
+	function procFaqInsertCategory($args = null)
+	{
 		if(!$args) $args = Context::gets('category_srl','module_srl','parent_srl','title','group_srls','color','mid','depth');
 
 		if(!$args->module_srl && $args->mid){
@@ -401,7 +441,6 @@ class faqController extends faq {
 		$grant = $oModuleModel->getGrant($module_info, Context::get('logged_info'));
 		if(!$grant->manager) return new Object(-1,'msg_not_permitted');
 
-
 		$args->group_srls = str_replace('|@|',',',$args->group_srls);
 		$args->parent_srl = intval($args->parent_srl);
 		$args->depth = intval($args->depth);
@@ -412,25 +451,30 @@ class faqController extends faq {
 		$oDB->begin();
 
 		// check whether the category exists
-		if($args->category_srl) {
+		if($args->category_srl)
+		{
 			$category_info = $oFaqModel->getCategory($args->category_srl);
 			$args->parent_srl = intval($category_info->parent_srl);
 			$args->depth = intval($category_info->depth);
 			if($category_info->category_srl != $args->category_srl) $args->category_srl = null;
 		}
 
-		// update category
-		if($args->category_srl) {
+		if($args->category_srl)
+		{
+			// update category
 			$output = $this->updateCategory($args);
-			if(!$output->toBool()) {
+			if(!$output->toBool())
+			{
 				$oDB->rollback();
 				return $output;
 			}
-
-		// insert category
-		} else {
+		}
+		else
+		{
+			// insert category
 			$output = $this->insertCategory($args);
-			if(!$output->toBool()) {
+			if(!$output->toBool())
+			{
 				$oDB->rollback();
 				return $output;
 			}
@@ -447,8 +491,8 @@ class faqController extends faq {
 	/**
 	 * @brief proc delete category
 	 **/
-	function procFaqDeleteCategory() {
-
+	function procFaqDeleteCategory()
+	{
 		$args = Context::gets('module_srl','category_srl');
 
 		$oDB = &DB::getInstance();
@@ -467,11 +511,15 @@ class faqController extends faq {
 		if($category_info->parent_srl) $parent_srl = $category_info->parent_srl;
 
 		// if the category has any child, then return an error
-		if($oFaqModel->getCategoryChlidCount($args->category_srl)) return new Object(-1, 'msg_cannot_delete_for_child');
+		if($oFaqModel->getCategoryChlidCount($args->category_srl))
+		{
+			return new Object(-1, 'msg_cannot_delete_for_child');
+		}
 
 		// delete category
 		$output = $this->deleteCategory($args->category_srl);
-		if(!$output->toBool()) {
+		if(!$output->toBool())
+		{
 			$oDB->rollback();
 			return $output;
 		}
@@ -482,15 +530,17 @@ class faqController extends faq {
 		$this->setMessage('success_deleted');
 	}
 
-	function proGetQuesList() {
+	function proGetQuesList()
+	{
 		$category_srl = Context::get('category');
 		$mid = Context::get('mid');
 		$list_count = Context::get('list_count');
 		$page = intval(Context::get('page'));
 
+		$obj = new stdClass;
 		$obj->mid = $mid;
-        $obj->page = $page?$page:1;
-        $obj->list_count = $list_count?$list_count:5;
+		$obj->page = $page?$page:1;
+		$obj->list_count = $list_count?$list_count:5;
 		$obj->category_srl = $category_srl?$category_srl:null;
 		if($category_srl == 'all') $obj->category_srl = null;
 		$obj->search_keyword = Context::get('search_keyword');
@@ -500,13 +550,10 @@ class faqController extends faq {
 		$oQuestionModel = getModel('faq');
 		$questionList = $oQuestionModel->getQuestionList($obj);
 		$total_count = $questionList->total_count;
-
 		$questionList = $questionList->data;
 
-		
 		$this->add('question_list', $questionList);
 		$this->add('total_count', $total_count);
 	}
-
 }
-?>
+/* End of file */

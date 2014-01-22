@@ -4,9 +4,9 @@
 	<column name="category_srl" type="number" size="11" default="0" notnull="notnull" index="idx_category_srl" />
 	<column name="question" type="varchar" size="250" />
 	<column name="answer" type="bigtext" notnull="notnull" />
-    <column name="member_srl" type="number" size="11" notnull="notnull" index="idx_member_srl" />
-    <column name="regdate" type="date" index="idx_regdate" />
-    <column name="last_update" type="date" index="idx_last_update" />
-    <column name="list_order" type="number" size="11" notnull="notnull" index="idx_list_order" />
+	<column name="member_srl" type="number" size="11" notnull="notnull" index="idx_member_srl" />
+	<column name="regdate" type="date" index="idx_regdate" />
+	<column name="last_update" type="date" index="idx_last_update" />
+	<column name="list_order" type="number" size="11" notnull="notnull" index="idx_list_order" />
 	<column name="update_order" type="number" size="11" notnull="notnull" index="idx_update_order" />
 </table>

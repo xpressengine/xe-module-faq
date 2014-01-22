@@ -1,131 +1,168 @@
 <?php
-    /**
-     * @class  faqItem (question)
-     * @author NHN (developers@xpressengine.com)
-     * @brief  faq module faqItem class
-     **/
+/* Copyright (C) NAVER <http://www.navercorp.com> */
 
-    class faqItem extends Object {
+/**
+ * @class  faqItem (question)
+ * @author NAVER (developers@xpressengine.com)
+ * @brief  faq module faqItem class
+ **/
+class faqItem extends Object
+{
+	var $question_srl = 0;
+	var $lang_code = NULL;
 
-        var $question_srl = 0;
-        var $lang_code = null;
+	function faqItem($question_srl = 0, $load_extra_vars = TRUE)
+	{
+		$this->question_srl = $question_srl;
+		$this->_loadFromDB($load_extra_vars);
+	}
+
+	function setQuestion($question_srl, $load_extra_vars = TRUE)
+	{
+		$this->question_srl = $question_srl;
+		$this->_loadFromDB($load_extra_vars);
+	}
+
+	function _loadFromDB($load_extra_vars=TRUE)
+	{
+		if(!$this->question_srl) return;
+
+		$args = new stdClass;
+		$args->question_srl = $this->question_srl;
+		$output = executeQuery('faq.getQuestion', $args);
+		$this->setAttribute($output->data,$load_extra_vars);
+	}
+
+	function isExists()
+	{
+		return $this->question_srl ? TRUE : FALSE;
+	}
+
+	function isEditable()
+	{
+		if($this->isGranted()) return TRUE;
+		else return FALSE;
+	}
+
+	function isGranted()
+	{
+		if(!Context::get('is_logged')) return FALSE;
+		$logged_info = Context::get('logged_info');
+		if($logged_info->is_admin == 'Y') return TRUE;
+
+		$oModuleModel = getModel('module');
+		$grant = $oModuleModel->getGrant($oModuleModel->getModuleInfoByModuleSrl($this->get('module_srl')), $logged_info);
+		if($grant->manager)
+		{
+			return TRUE;
+		}
+
+		if($this->get('member_srl') && $this->get('member_srl') == $logged_info->member_srl)
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
 
 
-		function faqItem($question_srl = 0, $load_extra_vars = true) {
-            $this->question_srl = $question_srl;
-            $this->_loadFromDB($load_extra_vars);
-        }
+	function getQuestion($cut_size = 0, $tail='...')
+	{
+		if(!$this->question_srl) return;
 
-        function setQuestion($question_srl, $load_extra_vars = true) {
-            $this->question_srl = $question_srl;
-            $this->_loadFromDB($load_extra_vars);
-        }
+		$question = $this->getQuestionText($cut_size, $tail);
 
-		function _loadFromDB($load_extra_vars=true) {
-            if(!$this->question_srl) return;
+		$attrs = array();
 
-            $args->question_srl = $this->question_srl;
-            $output = executeQuery('faq.getQuestion', $args);
-            $this->setAttribute($output->data,$load_extra_vars);
-			
-        }
+		if(count($attrs))
+		{
+			return sprintf("<span style=\"%s\">%s</span>", implode(';',$attrs), htmlspecialchars($question));
+		}
+		else
+		{
+			return htmlspecialchars($question);
+		}
+	}
 
-        function isExists() {
-            return $this->question_srl ? true : false;
-        }
+	function getQuestionText($cut_size = 0, $tail='...')
+	{
+		if(!$this->question_srl) return;
 
-        function isEditable() {
-			if($this->isGranted()) return true;
-			else return false;
-        }
-        function isGranted() {
-            if(!Context::get('is_logged')) return false;
-            $logged_info = Context::get('logged_info');
-            if($logged_info->is_admin == 'Y') return true;
+		if($cut_size)
+		{
+			$question = cut_str($this->get('question'), $cut_size, $tail);
+		}
+		else
+		{
+			$question = $this->get('question');
+		}
 
-			$oModuleModel = getModel('module');
-			$grant = $oModuleModel->getGrant($oModuleModel->getModuleInfoByModuleSrl($this->get('module_srl')), $logged_info);
-			if($grant->manager) return true;
-            if($this->get('member_srl') && $this->get('member_srl') == $logged_info->member_srl) return true;
-            return false;
-        }
+		return $question;
+	}
 
+	/**
+	 * @brief return get editor
+	 **/
+	function getEditor()
+	{
+		$module_srl = $this->get('module_srl');
+		if(!$module_srl) $module_srl = Context::get('module_srl');
 
-        function getQuestion($cut_size = 0, $tail='...') {
-            if(!$this->question_srl) return;
+		// do not use auto_save
+		//$GLOBALS['__editor_module_config__'][$module_srl]->enable_autosave = 'N';
 
-            $question = $this->getQuestionText($cut_size, $tail);
+		$oEditorModel = getModel('editor');
 
-            $attrs = array();
+		return $oEditorModel->getModuleEditor('document', $module_srl, $this->question_srl, 'question_srl', 'answer');
+	}
 
-            if(count($attrs)) return sprintf("<span style=\"%s\">%s</span>", implode(';',$attrs), htmlspecialchars($question));
-            else return htmlspecialchars($question);
-        }
+	function getAnswer()
+	{
+		if(!$this->question_srl) return;
 
-        function getQuestionText($cut_size = 0, $tail='...') {
-            if(!$this->question_srl) return;
+		$answer = $this->get('answer');
+		if(!$stripEmbedTagException) stripEmbedTagForAdmin($answer, $this->get('member_srl'));
 
-            if($cut_size) $question = cut_str($this->get('question'), $cut_size, $tail);
-            else $question = $this->get('question');
+		// rewrite answer
+		$oContext = &Context::getInstance();
+		if($oContext->allow_rewrite)
+		{
+			$content = preg_replace('/<a([ \t]+)href=("|\')\.\/\?/i', "<a href=\\2". Context::getRequestUri() ."?", $content);
+		}
 
-            return $question;
-        }
+		return $answer;
+	}
 
-        /**
-         * @brief return get editor
-         **/
-        function getEditor() {
-            $module_srl = $this->get('module_srl');
-            if(!$module_srl) $module_srl = Context::get('module_srl');
-			
-			// do not use auto_save 
-			//$GLOBALS['__editor_module_config__'][$module_srl]->enable_autosave = 'N';
+	function getAnswerText($strlen = 0)
+	{
+		if(!$this->question_srl) return;
 
-            $oEditorModel = getModel('editor');
-            return $oEditorModel->getModuleEditor('document', $module_srl, $this->question_srl, 'question_srl', 'answer');
-        }
+		$_SESSION['accessible'][$this->question_srl] = true;
 
-        function getAnswer() {
-            if(!$this->question_srl) return;
+		$answer = $this->get('answer');
 
-            $answer = $this->get('answer');
-            if(!$stripEmbedTagException) stripEmbedTagForAdmin($answer, $this->get('member_srl'));
+		if($strlen)
+		{
+			return cut_str(strip_tags($answer),$strlen,'...');
+		}
 
-            // rewrite answer
-            $oContext = &Context::getInstance();
-            if($oContext->allow_rewrite) {
-                $content = preg_replace('/<a([ \t]+)href=("|\')\.\/\?/i',"<a href=\\2". Context::getRequestUri() ."?", $content);
-            }
+		return htmlspecialchars($answer);
+	}
 
-            return $answer;
-        }
+	function setAttribute($attribute,$load_extra_vars=TRUE)
+	{
+		if(!$attribute->question_srl)
+		{
+			$this->question_srl = null;
+			return;
+		}
 
-        function getAnswerText($strlen = 0) {
-            if(!$this->question_srl) return;
+		$this->question_srl = $attribute->question_srl;
+		$this->lang_code = $attribute->lang_code;
+		$this->adds($attribute);
 
-            $_SESSION['accessible'][$this->question_srl] = true;
-
-            $answer = $this->get('answer');
-
-            if($strlen) return cut_str(strip_tags($answer),$strlen,'...');
-
-            return htmlspecialchars($answer);
-        }
-
-        function setAttribute($attribute,$load_extra_vars=true) {
-            if(!$attribute->question_srl) {
-                $this->question_srl = null;
-                return;
-            }
-            $this->question_srl = $attribute->question_srl;
-            $this->lang_code = $attribute->lang_code;
-            $this->adds($attribute);
-
-            $oFaqModel = getModel('faq');
-            $GLOBALS['XE_QUESTION_LIST'][$this->question_srl] = $this;
-
-        }
-
-     
-    }
-?>
+		$oFaqModel = getModel('faq');
+		$GLOBALS['XE_QUESTION_LIST'][$this->question_srl] = $this;
+	}
+}
+/* End of file */

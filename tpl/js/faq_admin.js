@@ -6,15 +6,15 @@
 
 /* mass configuration*/
 function doCartSetup(url) {
-    var module_srl = new Array();
-    jQuery('#fo_list input[name=cart]:checked').each(function() {
-        module_srl[module_srl.length] = jQuery(this).val();
-    });
+	var module_srl = [];
+	jQuery('#fo_list input[name=cart]:checked').each(function() {
+		module_srl[module_srl.length] = jQuery(this).val();
+	});
 
-    if(module_srl.length<1) return;
+	if(module_srl.length<1) return;
 
-    url += "&module_srls="+module_srl.join(',');
-    popopen(url,'modulesSetup');
+	url += "&module_srls="+module_srl.join(',');
+	popopen(url,'modulesSetup');
 }
 
 function createCategory(obj){
@@ -23,12 +23,12 @@ function createCategory(obj){
 
 	if(title == '') return false;
 
-	var params = new Array();
+	var params = [];
 	params['mid'] = current_mid;
 	params['module_srl'] = module_srl;
 	params['title'] = title;
 
-	var response_tags = new Array('error','message','page','mid');
+	var response_tags = ['error','message','page','mid'];
 	exec_xml('faq', 'procFaqInsertCategory', params, completeInsertCategory, response_tags);
 
 }
@@ -47,14 +47,14 @@ function updateCategory(obj){
 
 	if(title == '' || category_srl == '') return false;
 
-	var params = new Array();
+	var params = [];
 	params['mid'] = current_mid;
 	params['module_srl'] = module_srl;
 	params['category_srl'] = category_srl;
 	params['title'] = title;
 
 
-	var response_tags = new Array('error','message','page','mid','selected_category');
+	var response_tags = ['error','message','page','mid','selected_category'];
 	exec_xml('faq', 'procFaqInsertCategory', params, completeInsertCategory, response_tags);
 
 }
@@ -62,11 +62,11 @@ function updateCategory(obj){
 function deleteCategory(obj){
 	var category_srl = jQuery("input[name=category_srl]",obj.form).val();
 
-	var params = new Array();
+	var params = [];
 	params['mid'] = current_mid;
 	params['category_srl'] = category_srl;
 
-	var response_tags = new Array('error','message','page','mid');
+	var response_tags = ['error','message','page','mid'];
 	exec_xml('faq', 'procFaqDeleteCategory', params, completeDeleteCategory, response_tags);
 }
 
@@ -89,14 +89,14 @@ function createSubCategory(obj){
 
 	if(title == '' || !parent_srl) return false;
 
-	var params = new Array();
+	var params = [];
 	params['mid'] = current_mid;
 	params['module_srl'] = module_srl;
 	params['title'] = title;
 	params['parent_srl'] = parent_srl;
 	params['depth'] = depth;
 
-	var response_tags = new Array('error','message','page','mid');
+	var response_tags = ['error','message','page','mid'];
 	exec_xml('faq', 'procFaqInsertCategory', params, completeInsertCategory, response_tags);
 
 }

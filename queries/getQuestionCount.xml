@@ -1,18 +1,18 @@
 <query id="getQuestionCount" action="select">
-    <tables>
-        <table name="faq_questions" />
-    </tables>
-    <columns>
-        <column name="count(*)" alias="count" />
-    </columns>
-    <conditions>
-        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" />
-        <condition operation="equal" column="category_srl" var="category_srl" />
-        <group pipe="and">
-            <condition operation="like" column="question" var="s_question" />
-            <condition operation="like" column="answer" var="s_answer" pipe="and" />
-            <condition operation="equal" column="member_srl" var="s_member_srl" pipe="and" />
-            <condition operation="like_prefix" column="regdate" var="s_regdate" pipe="and" />
-        </group>
-    </conditions>
+	<tables>
+		<table name="faq_questions" />
+	</tables>
+	<columns>
+		<column name="count(*)" alias="count" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" />
+		<condition operation="equal" column="category_srl" var="category_srl" />
+		<group pipe="and">
+			<condition operation="like" column="question" var="s_question" />
+			<condition operation="like" column="answer" var="s_answer" pipe="and" />
+			<condition operation="equal" column="member_srl" var="s_member_srl" pipe="and" />
+			<condition operation="like_prefix" column="regdate" var="s_regdate" pipe="and" />
+		</group>
+	</conditions>
 </query>

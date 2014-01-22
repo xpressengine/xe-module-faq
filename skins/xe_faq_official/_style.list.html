@@ -3,63 +3,63 @@
 
 <div class="faq_cont">
 <div class="tab_list m1">
-    <ul cond="$module_info->use_category=='Y'" id="top_category" class="top_category">
-        <li class="li_tab m1"|cond="!Context::get('category')" class="li_tab m2"|cond="Context::get('category')"><a href="{getUrl('','mid',$mid)}" class="tab_a"><span>All Categories</span></a></li>
-        <block loop="$category_list => $key, $val">
-        <li data="{$val->category_srl}" class="li_tab m1"|cond="$val->category_srl == Context::get('category') || $val->category_srl  ==  Context::get('topcategory')" class="li_tab m2"|cond="$val->category_srl != Context::get('category') && $val->category_srl != Context::get('topcategory')">
-            <a href="{getUrl('','mid',$mid,'category',$val->category_srl)}" class="tab_a"><span>{$val->title}</span></a>
-            {@ $oFaqModel = &getModel('faq');
+	<ul cond="$module_info->use_category=='Y'" id="top_category" class="top_category">
+		<li class="li_tab m1"|cond="!Context::get('category')" class="li_tab m2"|cond="Context::get('category')"><a href="{getUrl('','mid',$mid)}" class="tab_a"><span>All Categories</span></a></li>
+		<block loop="$category_list => $key, $val">
+		<li data="{$val->category_srl}" class="li_tab m1"|cond="$val->category_srl == Context::get('category') || $val->category_srl  ==  Context::get('topcategory')" class="li_tab m2"|cond="$val->category_srl != Context::get('category') && $val->category_srl != Context::get('topcategory')">
+			<a href="{getUrl('','mid',$mid,'category',$val->category_srl)}" class="tab_a"><span>{$val->title}</span></a>
+			{@ $oFaqModel = &getModel('faq');
 			  $depth =  $oFaqModel->getHighestCategoryDepth($val->module_srl, $val->category_srl);
-              $subCategories_1 = $oFaqModel->getSubCategoryListByDepth($val->module_srl, $val->category_srl,1);
+			  $subCategories_1 = $oFaqModel->getSubCategoryListByDepth($val->module_srl, $val->category_srl,1);
 			  $oSecurity = new Security($subCategories_1);
 			  $oSecurity->encodeHTML('..');
-            }
-            <div id="popup{$val->category_srl}" class="popover_cate" cond="$subCategories_1">
-                <span class="arr"></span>
-                <!--opt1: only has first level subcategories -->
-                <ul class='subcate_ul_h' cond="$subCategories_1&&$depth<2">
+			}
+			<div id="popup{$val->category_srl}" class="popover_cate" cond="$subCategories_1">
+				<span class="arr"></span>
+				<!--opt1: only has first level subcategories -->
+				<ul class='subcate_ul_h' cond="$subCategories_1&&$depth<2">
 					<li loop="$subCategories_1 =>$key1,$val1"  class="cat_on"|cond="$val1->category_srl == Context::get('category')" class="subcate_list"|cond="$val1->category_srl != Context::get('category')">
 						<a href="{getUrl('','mid',$mid,'category',$val1->category_srl,'topcategory',$val->category_srl)}" >{$val1->title}</a>
 					</li>
-                </ul> 
+				</ul> 
 
-                <!-- opt2: only has second level subcategories -->
-                <ul class="subcate_ul_v" cond="$subCategories_1&&$depth>1" >
-                    <li class="row" loop="$subCategories_1 =>$key2,$val2" >
-                        <dl>
-                        <dt class="cat_on"|cond="$val2->category_srl == Context::get('category') || $val2->category_srl == Context::get('secategory')" class="cg_L2"|cond="$val2->category_srl != Context::get('category') && $val2->category_srl != Context::get('secategory')"><a  href="{getUrl('','mid',$mid,'category',$val2->category_srl,'topcategory',$val->category_srl)}">{$val2->title}</a></dt>
-                        <dd class="cg_L3">
+				<!-- opt2: only has second level subcategories -->
+				<ul class="subcate_ul_v" cond="$subCategories_1&&$depth>1" >
+					<li class="row" loop="$subCategories_1 =>$key2,$val2" >
+						<dl>
+						<dt class="cat_on"|cond="$val2->category_srl == Context::get('category') || $val2->category_srl == Context::get('secategory')" class="cg_L2"|cond="$val2->category_srl != Context::get('category') && $val2->category_srl != Context::get('secategory')"><a  href="{getUrl('','mid',$mid,'category',$val2->category_srl,'topcategory',$val->category_srl)}">{$val2->title}</a></dt>
+						<dd class="cg_L3">
 						{@$subCategories_2 = $oFaqModel->getSubCategoryListByDepth($val->module_srl, $val2->category_srl,2);
 							$oSecurity = new Security($subCategories_2);
 							$oSecurity->encodeHTML('..');
 						}
-                        <ul>
-                        <li loop="$subCategories_2 =>$key3, $val3" class="cat_on"|cond="$val3->category_srl == Context::get('category')" ><a href="{getUrl('','mid',$mid,'category',$val3->category_srl,'topcategory',$val->category_srl,'secategory',$val2->category_srl)}">{$val3->title}</a></li>
+						<ul>
+						<li loop="$subCategories_2 =>$key3, $val3" class="cat_on"|cond="$val3->category_srl == Context::get('category')" ><a href="{getUrl('','mid',$mid,'category',$val3->category_srl,'topcategory',$val->category_srl,'secategory',$val2->category_srl)}">{$val3->title}</a></li>
 						<li cond="!$subCategories_2" >&nbsp;</li>
-                        </ul>
-                        </dd>
-                        </dl>
-                    </li>
-                </ul>
-            </div> <!-- //popover_cate -->
-        </li>
-        </block>
-        <li class="t_num">Total<em>{$total_count}</em></li>
-    </ul>
+						</ul>
+						</dd>
+						</dl>
+					</li>
+				</ul>
+			</div> <!-- //popover_cate -->
+		</li>
+		</block>
+		<li class="t_num">Total<em>{$total_count}</em></li>
+	</ul>
 </div>
 
 <ul class="faq_lst">
-    <block loop="$question_list => $question_index, $question">
-        <li id="q_li_link_{$question_index}" class="off"><a id="qlink_{$question_index}" href="#q_a_link_{$question_index}" class="title">{$question->question}</a><a id="q_a_link_{$question_index}" href="#q_a_link_{$question_index}" class="btn_show"></a>
-            <div id="qAnswer_{$question_index}" class="a_cont" >
-                {$question->answer}
-                <p cond="$oQuestion->isEditable()" class="btn_del_mod">
-                    <a href="{getUrl('act','dispFaqWrite','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_modify}</span></a>
-                    <a href="{getUrl('act','dispFaqDelete','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_delete}</span></a>
-                </p>
-            </div>  
-        </li>
-    </block>
+	<block loop="$question_list => $question_index, $question">
+		<li id="q_li_link_{$question_index}" class="off"><a id="qlink_{$question_index}" href="#q_a_link_{$question_index}" class="title">{$question->question}</a><a id="q_a_link_{$question_index}" href="#q_a_link_{$question_index}" class="btn_show"></a>
+			<div id="qAnswer_{$question_index}" class="a_cont" >
+				{$question->answer}
+				<p cond="$oQuestion->isEditable()" class="btn_del_mod">
+					<a href="{getUrl('act','dispFaqWrite','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_modify}</span></a>
+					<a href="{getUrl('act','dispFaqDelete','question_srl',$question->question_srl)}" class="btn"><span>{$lang->cmd_delete}</span></a>
+				</p>
+			</div>  
+		</li>
+	</block>
 </ul>
 
 </div>
